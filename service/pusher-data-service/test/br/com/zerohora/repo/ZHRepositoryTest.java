@@ -1,13 +1,5 @@
-package br.com.zerohora.pusher.service;
+package br.com.zerohora.repo;
 
-import javax.enterprise.context.RequestScoped;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
-import net.sf.json.JSONObject;
 /**
  * Copyright 2014 Zero Hora
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,16 +13,8 @@ import net.sf.json.JSONObject;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * @author isaias_alves <isaiasa@gmail.com>
  */
-@Path("news")
-@Produces(MediaType.APPLICATION_JSON)
-@RequestScoped
-public class PusherNewsService {
+public class ZHRepositoryTest {
 
-	@GET
-	@Path("list/{team}")
-	public JSONObject listByTeam( @PathParam("teams") final String team ) {
-		return null;
-	}
-	
 }
