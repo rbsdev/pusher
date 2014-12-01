@@ -3,8 +3,8 @@
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 	id="WebApp_ID" version="3.0">
-	<description>pusher-data</description>
-	<display-name>pusher-data</display-name>
+	<description>pusher-data-service</description>
+	<display-name>pusher-data-service</display-name>
 	
 	<servlet> 
 		<servlet-name>services</servlet-name>
