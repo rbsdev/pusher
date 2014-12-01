@@ -1,5 +1,13 @@
 package br.com.zerohora.repo;
 
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+
 /**
  * Copyright 2014 Zero Hora
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,8 +23,53 @@ package br.com.zerohora.repo;
  * limitations under the License.
  * @author isaias_alves <isaiasa@gmail.com>
  */
-public class ZHRepositoryTest {
-
+public class ZHRepositoryTest extends ZHRepository {
 	
+
+	private ZHRepository repo = this;
+	private Integer idValue = 4654257;
+	private String titleValue = "Luiz Zini Pires: Vasco devolverá Kleber e quer ficar com Maxi Rodríguez";
+	private String tagValue = "Opinião";
+	private String dateValue = "2014-12-01:11:01:23";
+	private String thumbValue = "http://www.clicrbs.com.br/rbs/image/17081694.jpg?w=230";
+	private String linkDeskValue = "http://zh.clicrbs.com.br/rs/esportes/gremio/noticia/2014/12/luiz-zini-pires-vasco-devolvera-kleber-e-quer-ficar-com-maxi-rodriguez-4654257.html";
+	private String linkMobilValue = "http://m.zerohora.com.br/295/gremio/4654257/luiz-zini-pires-vasco-devolvera-kleber-e-quer-ficar-com-maxi-rodriguez";
+	
+	@Before
+	public void setUp() throws Exception {
+		repo = new ZHRepository(); // repo spy	
+		
+		StringBuilder fakeResponseBuilder = new StringBuilder();
+		
+		fakeResponseBuilder.append("{\"news\": [");
+		fakeResponseBuilder.append("{\"id\": \""+idValue.toString()+"\",");
+		fakeResponseBuilder.append("\"title\": \""+titleValue+"\",");
+		fakeResponseBuilder.append(" \"tag\": \""+tagValue+"\",");
+		fakeResponseBuilder.append("\"date\": \""+dateValue+"\",");
+		fakeResponseBuilder.append("\"thumb\": \""+thumbValue+"\",");
+
+		fakeResponseBuilder.append("\"link-desktop\": \"++\",");
+		fakeResponseBuilder.append("\"link-mobile\": \""+linkMobilValue+"\"");
+		fakeResponseBuilder.append("}]}");
+		
+		repo.urlContent = fakeResponseBuilder.toString();
+	}
+	
+	@Test
+	public void getNewsMethodMustBeReturnAValidList() {
+		
+		JSONArray arrayItems = new JSONArray();
+		
+		Assert.assertEquals("Array size must be equals fake object size (1).",1,arrayItems.size());
+		
+		JSONObject item = arrayItems.getJSONObject(0);
+		Assert.assertEquals("Item id must be equals fake object value.",idValue,new Integer(item.getString("id")));
+		Assert.assertEquals("Item title must be equals fake object value.",titleValue,item.getString("title"));
+		Assert.assertEquals("Item tag must be equals fake object value.",tagValue,item.getString("tagValue"));
+		Assert.assertEquals("Item tag must be equals fake object value.",dateValue,item.getString("date"));
+		Assert.assertEquals("Item tag must be equals fake object value.",thumbValue,item.getString("thumb"));
+		Assert.assertEquals("Item tag must be equals fake object value.",linkDeskValue,item.getString("link-desktop"));
+		Assert.assertEquals("Item tag must be equals fake object value.",linkMobilValue,item.getString("link-mobile"));
+	}
 	
 }

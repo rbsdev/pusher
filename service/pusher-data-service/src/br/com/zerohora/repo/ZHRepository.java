@@ -10,6 +10,7 @@ import java.net.URL;
 import java.nio.charset.Charset;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
 
 /**
@@ -36,6 +37,7 @@ public class ZHRepository {
 								+ "&size={size}&includelink=true";
 
 	protected String serviceURL;
+	protected String urlContent;
 	
 	/** Type of Teams */
 	public enum Teams {
@@ -52,43 +54,43 @@ public class ZHRepository {
 		public Long getId() {
 			return id;
 		}
-
-		@SuppressWarnings("unused")
 		public String getTeamName() {
 			return teamName;
 		}
 	}
 
-	public ZHRepository( final Teams team, final Integer size, final Integer hl  ) {
+	public ZHRepository( final Teams team, final Integer size, final Integer hl ) {
 		this.buildServiceUrlByTeam(team, size, hl);
+		this.buildUrlContent(this.serviceURL);
 	}
 	
+	public ZHRepository() {}
+	
 	public JSONArray getNews() {
+		return ((JSONObject)JSONSerializer.toJSON(urlContent)).getJSONArray("news");  
+	}
+
+	protected void buildUrlContent(final String url) {
 		try {
-			return getArrayItems(serviceURL);
+			final InputStream is = new URL(url).openStream();
+		    try {
+		      final BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
+		      this.urlContent = readAll(rd);
+		    } finally {
+		      is.close();
+		    }
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
 	}
-
+	
 	protected void buildServiceUrlByTeam(final Teams team,final Integer size, final Integer hl ) {
 		
 		this.serviceURL = ZH_PUBLIC_NEWS_LIST.replaceAll("\\{id}",team.getId().toString())
 				 							 .replaceAll("\\{hl}",hl.toString())
 				 							 .replaceAll("\\{size}", size.toString());
-	}
-		
-	protected JSONArray getArrayItems( final String url ) throws MalformedURLException, IOException {
-		final InputStream is = new URL(url).openStream();
-	    try {
-	      final BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-	      return (JSONArray)JSONSerializer.toJSON(readAll(rd));     
-	    } finally {
-	      is.close();
-	    }
 	}
 	
 	private static String readAll(Reader rd) throws IOException {
