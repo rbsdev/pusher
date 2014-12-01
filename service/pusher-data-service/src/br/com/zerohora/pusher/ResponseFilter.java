@@ -26,25 +26,36 @@ import com.sun.jersey.spi.container.ContainerResponseFilter;
 @Provider
 public class ResponseFilter implements ContainerResponseFilter {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.sun.jersey.spi.container.ContainerResponseFilter#filter(com.sun.jersey
-	 * .spi.container.ContainerRequest,
-	 * com.sun.jersey.spi.container.ContainerResponse)
-	 */
+	private Integer maxAge = 120;
+	private String allowOrigin = "*";
+
 	@Override
 	public ContainerResponse filter(ContainerRequest request, ContainerResponse response) {
 		try {
 			MultivaluedMap<String, Object> headers = response.getHttpHeaders();
-			headers.add("Access-Control-Allow-Origin", "*"); // Allow for any clients
+			headers.add("Access-Control-Allow-Origin", allowOrigin); // Allow for any clients
 			headers.add("Cache-control", "public, max-age=120");//cache 120 secounds
 			final MediaType contentType = response.getMediaType();
 			headers.putSingle("Content-Type", contentType.toString() + ";charset=UTF-8");
 		} catch (Exception e) {
+			throw e;
 		}
 		return response;
 	}
 
+	public Integer getMaxAge() {
+		return maxAge;
+	}
+
+	public void setMaxAge(Integer maxAge) {
+		this.maxAge = maxAge;
+	}
+
+	public String getAllowOrigin() {
+		return allowOrigin;
+	}
+
+	public void setAllowOrigin(String allowOrigin) {
+		this.allowOrigin = allowOrigin;
+	}
 }

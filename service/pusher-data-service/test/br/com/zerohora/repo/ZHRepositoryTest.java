@@ -25,18 +25,31 @@ import org.junit.Test;
  */
 public class ZHRepositoryTest extends ZHRepository {
 	
-
 	private ZHRepository repo = this;
-	private Integer idValue = 4654257;
-	private String titleValue = "Luiz Zini Pires: Vasco devolverá Kleber e quer ficar com Maxi Rodríguez";
-	private String tagValue = "Opinião";
-	private String dateValue = "2014-12-01:11:01:23";
-	private String thumbValue = "http://www.clicrbs.com.br/rbs/image/17081694.jpg?w=230";
-	private String linkDeskValue = "http://zh.clicrbs.com.br/rs/esportes/gremio/noticia/2014/12/luiz-zini-pires-vasco-devolvera-kleber-e-quer-ficar-com-maxi-rodriguez-4654257.html";
-	private String linkMobilValue = "http://m.zerohora.com.br/295/gremio/4654257/luiz-zini-pires-vasco-devolvera-kleber-e-quer-ficar-com-maxi-rodriguez";
+	private JSONArray arrayItems;
+	private JSONObject item;
+	private final Integer idValue = 4654257;
+	private final String titleValue = "Luiz Zini Pires: Vasco devolverá Kleber e quer ficar com Maxi Rodríguez";
+	private final String tagValue = "Opinião";
+	private final String dateValue = "2014-12-01:11:01:23";
+	private final String thumbValue = "http://www.clicrbs.com.br/rbs/image/17081694.jpg?w=230";
+	private final String linkDeskValue = "http://zh.clicrbs.com.br/rs/esportes/gremio/noticia/2014/12/luiz-zini-pires-vasco-devolvera-kleber-e-quer-ficar-com-maxi-rodriguez-4654257.html";
+	private final String linkMobilValue = "http://m.zerohora.com.br/295/gremio/4654257/luiz-zini-pires-vasco-devolvera-kleber-e-quer-ficar-com-maxi-rodriguez";
 	
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception {		
+		buildFakeRepo();
+		if (this.arrayItems == null) {
+			buildArrayAndItem(repo.getNews());
+		}
+	}
+	
+	public void buildArrayAndItem(JSONArray array) {
+		arrayItems = array;
+		item = arrayItems.getJSONObject(0);
+	}
+	
+	private void buildFakeRepo() {
 		repo = new ZHRepository(); // repo spy	
 		
 		StringBuilder fakeResponseBuilder = new StringBuilder();
@@ -48,28 +61,103 @@ public class ZHRepositoryTest extends ZHRepository {
 		fakeResponseBuilder.append("\"date\": \""+dateValue+"\",");
 		fakeResponseBuilder.append("\"thumb\": \""+thumbValue+"\",");
 
-		fakeResponseBuilder.append("\"link-desktop\": \"++\",");
+		fakeResponseBuilder.append("\"link-desktop\": \""+linkDeskValue+"\",");
 		fakeResponseBuilder.append("\"link-mobile\": \""+linkMobilValue+"\"");
 		fakeResponseBuilder.append("}]}");
 		
 		repo.urlContent = fakeResponseBuilder.toString();
 	}
-	
+
 	@Test
-	public void getNewsMethodMustBeReturnAValidList() {
-		
-		JSONArray arrayItems = new JSONArray();
-		
-		Assert.assertEquals("Array size must be equals fake object size (1).",1,arrayItems.size());
-		
-		JSONObject item = arrayItems.getJSONObject(0);
-		Assert.assertEquals("Item id must be equals fake object value.",idValue,new Integer(item.getString("id")));
-		Assert.assertEquals("Item title must be equals fake object value.",titleValue,item.getString("title"));
-		Assert.assertEquals("Item tag must be equals fake object value.",tagValue,item.getString("tagValue"));
-		Assert.assertEquals("Item tag must be equals fake object value.",dateValue,item.getString("date"));
-		Assert.assertEquals("Item tag must be equals fake object value.",thumbValue,item.getString("thumb"));
-		Assert.assertEquals("Item tag must be equals fake object value.",linkDeskValue,item.getString("link-desktop"));
-		Assert.assertEquals("Item tag must be equals fake object value.",linkMobilValue,item.getString("link-mobile"));
+	public void arrayItemSizeMustBe1() {
+		Assert.assertEquals("Array size must be equals fake object size (1).",
+							1,arrayItems.size());
 	}
 	
+	@Test
+	public void arrayItemIdMustBeEqualsDefinedObject() {
+		Assert.assertEquals("Item id must be equals fake object value.",
+							 idValue,new Integer(item.getString("id")));	
+	}
+	
+	@Test
+	public void  arrayItemTitleMustBeEqualsDefinedObject()  {
+		Assert.assertEquals("Item title must be equals fake object value.",
+							 titleValue,item.getString("title"));
+	}
+	
+	@Test
+	public void arrayItemTagMustBeEqualsDefinedObject()  {
+		Assert.assertEquals("Item tag must be equals fake object value.",
+				             tagValue,item.getString("tag"));
+	}
+	
+	@Test
+	public void arrayItemDateMustBeEqualsDefinedObject() {
+		Assert.assertEquals("Item date must be equals fake object value.",
+							 dateValue,item.getString("date"));
+	}
+	
+	@Test
+	public void arrayItemThumbMustBeEqualsDefinedObject() {
+		Assert.assertEquals("Item thumb must be equals fake object value.",
+							 thumbValue,item.getString("thumb"));
+	}
+	
+	@Test
+	public void arrayItemLinkDesktopMustBeEqualsDefinedObject() {
+		Assert.assertEquals("Item link desk must be equals fake object value.",
+							 linkDeskValue,item.getString("link-desktop"));
+	}
+	
+	@Test
+	public void  arrayItemLinkMobileMustBeEqualsDefinedObject() {
+		Assert.assertEquals("Item link mobile must be equals fake object value.",
+							 linkMobilValue,item.getString("link-mobile"));
+	}
+	
+	@Test
+	public void assertAllFieldTypesOfInternalArray() {
+		arrayItemSizeMustBe1();
+		arrayItemIdMustBeEqualsDefinedObject();
+		arrayItemTitleMustBeEqualsDefinedObject();
+		arrayItemTagMustBeEqualsDefinedObject();
+		arrayItemDateMustBeEqualsDefinedObject();
+		arrayItemThumbMustBeEqualsDefinedObject();
+		arrayItemLinkDesktopMustBeEqualsDefinedObject();
+		arrayItemLinkMobileMustBeEqualsDefinedObject();
+	}
+	
+	private static ZHRepositoryTest thisTest = null;
+	
+	/**
+	 * Obtain a instance of internal fake repo used 
+	 * on this test case class - singleton
+	 * @return Fake repository
+	 */
+	public static ZHRepositoryTest getInstance( ) {
+		try {
+			 new ZHRepositoryTest();
+			
+			if (thisTest == null) {
+				thisTest = new ZHRepositoryTest();
+			}
+			
+			thisTest.setUp();
+			return thisTest;
+		} catch (Exception e) {e.printStackTrace();}
+		return null;
+	}
+	
+	public void setArrayItems(JSONArray arrayItems) {
+		this.arrayItems = arrayItems;
+	}
+
+	public ZHRepository getRepo() {
+		return repo;
+	}
+
+	public void setRepo(ZHRepository repo) {
+		this.repo = repo;
+	}
 }

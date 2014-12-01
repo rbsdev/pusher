@@ -29,12 +29,14 @@ public class PusherList {
 							   final Integer hl, 
 							   final Integer size ) throws PusherException {
 		
-		try {
-			repo = new ZHRepository(ZHRepository.Teams.valueOf(team.toUpperCase()), size, hl);
-		} catch (Exception e) {
-			PusherException pusherRepoError = new PusherException(Errors.NEWS_REPO_ERROR);
-			pusherRepoError.addSuppressed(e);
-			throw pusherRepoError;
+		if (repo == null) {
+			try {
+				repo = new ZHRepository(ZHRepository.Teams.valueOf(team.toUpperCase()), size, hl);
+			} catch (Exception e) {
+				PusherException pusherRepoError = new PusherException(Errors.NEWS_REPO_ERROR);
+				pusherRepoError.addSuppressed(e);
+				throw pusherRepoError;
+			}
 		}
 		
 		if (size > 100) {
@@ -44,6 +46,10 @@ public class PusherList {
 		return repo.getNews();
 	}
 	
+	public void setRepo(ZHRepository repo) {
+		this.repo = repo;
+	}
+
 }
 
 
