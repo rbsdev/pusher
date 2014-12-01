@@ -26,12 +26,11 @@ public class PusherList {
 	protected Integer maxSize = 100;
 	
 	public JSONArray listNews( final String team,
-							   final boolean isHl, 
-							   final Integer size, 
-							   final Long id ) throws PusherException {
+							   final Integer hl, 
+							   final Integer size ) throws PusherException {
 		
 		try {
-			repo = new ZHRepository(ZHRepository.Teams.valueOf(team.toUpperCase()), size, isHl);
+			repo = new ZHRepository(ZHRepository.Teams.valueOf(team.toUpperCase()), size, hl);
 		} catch (Exception e) {
 			PusherException pusherRepoError = new PusherException(Errors.NEWS_REPO_ERROR);
 			pusherRepoError.addSuppressed(e);

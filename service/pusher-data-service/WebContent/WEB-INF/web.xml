@@ -11,7 +11,7 @@
 		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
 		<init-param>
 			<param-name>com.sun.jersey.config.property.packages</param-name>
-			<param-value>br.com.gruporbs.temporeal.service</param-value>
+			<param-value>br.com.zerohora.pusher.service</param-value>
 		</init-param>
 		<init-param>
 			<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
@@ -19,7 +19,7 @@
 		</init-param>
 		<init-param>
 			<param-name>com.sun.jersey.spi.container.ContainerResponseFilters</param-name>
-			<param-value>br.com.gruporbs.temporeal.resource.CardsResponseFilter</param-value>
+			<param-value>br.com.zerohora.pusher.ResponseFilter</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

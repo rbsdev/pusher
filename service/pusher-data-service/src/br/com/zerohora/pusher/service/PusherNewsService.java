@@ -1,13 +1,17 @@
 package br.com.zerohora.pusher.service;
 
 import javax.enterprise.context.RequestScoped;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import net.sf.json.JSONObject;
+import br.com.zerohora.pusher.PusherList;
+import br.com.zerohora.pusher.exception.PusherException;
+import net.sf.json.JSONArray;
 /**
  * Copyright 2014 Zero Hora
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,8 +33,14 @@ public class PusherNewsService {
 
 	@GET
 	@Path("list/{team}")
-	public JSONObject listByTeam( @PathParam("teams") final String team ) {
-		return null;
+	public JSONArray listByTeam( @PathParam("team") final String team, 
+								 @DefaultValue("20") @QueryParam("size") final Integer size, 
+								 @DefaultValue("2")  @QueryParam("hl") final Integer hl ) throws PusherException {
+		try {
+			return new PusherList().listNews(team, hl, size);
+		} catch (PusherException e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
-	
 }

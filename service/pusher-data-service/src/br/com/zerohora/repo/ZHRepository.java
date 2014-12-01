@@ -59,8 +59,8 @@ public class ZHRepository {
 		}
 	}
 
-	public ZHRepository( final Teams team, final Integer size, final boolean isHl  ) {
-		this.buildServiceUrlByTeam(team, size, isHl);
+	public ZHRepository( final Teams team, final Integer size, final Integer hl  ) {
+		this.buildServiceUrlByTeam(team, size, hl);
 	}
 	
 	public JSONArray getNews() {
@@ -74,10 +74,10 @@ public class ZHRepository {
 		return null;
 	}
 
-	protected void buildServiceUrlByTeam(final Teams team,final Integer size, final boolean isHl ) {
+	protected void buildServiceUrlByTeam(final Teams team,final Integer size, final Integer hl ) {
 		
 		this.serviceURL = ZH_PUBLIC_NEWS_LIST.replaceAll("\\{id}",team.getId().toString())
-				 							 .replaceAll("\\{hl}",(isHl?"1":"0"))
+				 							 .replaceAll("\\{hl}",hl.toString())
 				 							 .replaceAll("\\{size}", size.toString());
 	}
 		
