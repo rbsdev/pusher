@@ -32,3 +32,12 @@ css/
 vendor/
 .sass-cache/
 js/bundle.js
+
+# Java files
+*.class
+.mtj.tmp/
+*.jar
+*.war
+*.ear
+hs_err_pid*
+target/
