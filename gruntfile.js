@@ -53,6 +53,17 @@ module.exports = function(grunt) {
               dest: "app/css"
             }]
           }
+        },
+
+        connect: {
+            server: {
+                options: {
+                    hostname: '127.0.0.1',
+                    port: 8888,
+                    base: '.',
+                    keepalive: false
+                }
+            }
         }
     });
 
@@ -62,6 +73,7 @@ module.exports = function(grunt) {
         'grunt-contrib-jasmine',
         'grunt-contrib-watch',
         'grunt-browserify',
+        'grunt-contrib-connect',
     ].forEach(grunt.loadNpmTasks);
 
   grunt.registerTask('default', ['jshint', 'uglify', 'browserify']);

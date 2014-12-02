@@ -49,6 +49,9 @@ public class ZHRepository {
 		
 		private Teams( final String teamName, final Long id ) {
 			
+			this.id = id;
+			this.teamName = teamName;
+			
 		}
 
 		public Long getId() {
