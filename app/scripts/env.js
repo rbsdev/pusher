@@ -14,6 +14,7 @@ Env.isChromeKind = Env.KIND_SLUG == 'chrome';
 Env.isFirefoxKind = Env.KIND_SLUG == 'firefox';
 Env.isLinuxKind = Env.KIND_SLUG == 'linux';
 Env.isOSXKind = Env.KIND_SLUG == 'os-x';
+Env.isSandboxKind = Env.KIND_SLUG == 'sandbox';
 Env.isWindowsKind = Env.KIND_SLUG == 'windows';
 
 if (Env.isGremioTeam) {

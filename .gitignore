@@ -24,12 +24,6 @@ $RECYCLE.BIN/
 .mtj.tmp/
 .Spotlight-V100
 .Trashes
-app/css/*
-!app/css/main.css
-app/js/build.js
-app/js/build.min.js
-app/vendor
-build/
 coverage
 Desktop.ini
 ehthumbs.db
@@ -42,3 +36,7 @@ node_modules
 pids
 Temporary Items
 Thumbs.db
+
+!app/css/main.css
+app/vendor
+build

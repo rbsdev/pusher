@@ -11,66 +11,55 @@ module.exports = function(grunt) {
              .join('; ');
   };
 
-  var files = {
-    js: [
-      'app/js/list.js',
-      'app/js/template.js',
-      'app/js/ajax.js',
-      'app/js/humanize-date.js'
-    ]
-  };
-
   grunt.initConfig({
     pkg: require('./package'),
 
+    browserify: {
+      main: {
+        files: {
+          'app/build/scripts/main.js': ['app/scripts/main.js']
+        }
+      }
+    },
+
     build: {
       test: ['jshint'],
+      clean: ['shell:clean'],
       styles: ['sass'],
       scripts: ['browserify', 'uglify'],
-      clean: ['shell:clean'],
       tree: ['shell:tree'],
-      pack: ['shell:packChrome']
+      pack: [
+        'shell:packChrome',
+        'shell:packSandbox'
+      ]
+    },
+
+    connect: {
+      main: {
+        options: {
+          base: 'build/sandbox',
+          hostname: '*',
+          port: 8888
+        }
+      }
     },
 
     jshint: {
-      all: files.js
+      main: ['app/scripts/*.js']
     },
 
     uglify: {
-      build: {
+      main: {
         files: {
-          'app/js/build.min.js': 'app/js/build.js'
+          'app/build/scripts/main.min.js': 'app/build/scripts/main.js'
         }
-      }
-    },
-
-    browserify: {
-      dist: {
-        files: {
-          'app/js/build.js': ['app/js/main.js']
-        }
-      }
-    },
-
-    watch: {
-      // files: ['<%= jshint.files %>'],
-      // tasks: ['jshint']
-      js: {
-        files: files.js,
-        tasks: ['build:test', 'build:scripts']
-      },
-
-      css: {
-        files: [ "app/styles/*.scss" ],
-        tasks: ["build:styles"]
       }
     },
 
     sass: {
       main: {
         options: {
-          outputStyle: 'compressed',
-          sourceMap: false
+          outputStyle: 'compressed'
         },
 
         files: [{
@@ -78,24 +67,18 @@ module.exports = function(grunt) {
           expand: true,
           ext: '.css',
           flatten: true,
-          src: ["app/styles/*.scss"],
-          dest: "app/css"
+          src: ['app/styles/*.scss'],
+          dest: 'app/build/styles'
         }]
-      }
-    },
-
-    connect: {
-      server: {
-        options: {
-          port: 8888,
-          keepalive: false
-        }
       }
     },
 
     shell: {
       clean: {
-        command: 'rm -fr build/*'
+        command: [
+          'rm -fr app/build/*',
+          'rm -fr build/*'
+        ].join('; ')
       },
 
       tree: {
@@ -105,7 +88,8 @@ module.exports = function(grunt) {
             'mkdir -p build/firefox/{{TEAM}}',
             'mkdir -p build/linux/{{TEAM}}',
             'mkdir -p build/os-x/{{TEAM}}',
-            'mkdir -p build/windows/{{TEAM}}',
+            'mkdir -p build/sandbox/{{TEAM}}',
+            'mkdir -p build/windows/{{TEAM}}'
           ];
 
           return teamify(commands);
@@ -115,24 +99,55 @@ module.exports = function(grunt) {
       packChrome: {
         command: (function() {
           var commands = [
-            'cp app/chrome/manifest.json build/chrome/{{TEAM}}/manifest.json',
+            'cp third/chrome/manifest.json build/chrome/{{TEAM}}/manifest.json',
 
-            'mkdir -p build/chrome/{{TEAM}}/css',
-            'cp app/css/{{TEAM}}.css build/chrome/{{TEAM}}/css/main.css',
+            'mkdir -p build/chrome/{{TEAM}}/styles',
+            'cp app/build/styles/{{TEAM}}.css build/chrome/{{TEAM}}/styles/main.css',
 
-            'cp -R app/img/ build/chrome/{{TEAM}}/img/',
+            'cp -R app/images/ build/chrome/{{TEAM}}/images/',
             'cp app/index.html build/chrome/{{TEAM}}/index.html',
 
-            'mkdir -p build/chrome/{{TEAM}}/js',
-            'cp app/js/build.js build/chrome/{{TEAM}}/js/build.js',
-            'cp app/js/build.min.js build/chrome/{{TEAM}}/js/build.min.js',
+            'mkdir -p build/chrome/{{TEAM}}/scripts',
+            'cp app/build/scripts/main.min.js build/chrome/{{TEAM}}/scripts/main.js',
 
-            'sed -i "" "s/{{ENVIRONMENT_KIND_SLUG}}/chrome/g" build/chrome/{{TEAM}}/js/build.js build/chrome/{{TEAM}}/js/build.min.js',
-            'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{TEAM}}/g" build/chrome/{{TEAM}}/js/build.js build/chrome/{{TEAM}}/js/build.min.js'
+            'sed -i "" "s/{{ENVIRONMENT_KIND_SLUG}}/chrome/g" build/chrome/{{TEAM}}/scripts/main.js',
+            'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{TEAM}}/g" build/chrome/{{TEAM}}/scripts/main.js'
           ];
 
           return teamify(commands);
         })()
+      },
+
+      packSandbox: {
+        command: (function() {
+          var commands = [
+            'mkdir -p build/sandbox/{{TEAM}}/styles',
+            'cp app/build/styles/{{TEAM}}.css build/sandbox/{{TEAM}}/styles/main.css',
+
+            'cp -R app/images/ build/sandbox/{{TEAM}}/images/',
+            'cp app/index.html build/sandbox/{{TEAM}}/index.html',
+
+            'mkdir -p build/sandbox/{{TEAM}}/scripts',
+            'cp app/build/scripts/main.js build/sandbox/{{TEAM}}/scripts/main.js',
+
+            'sed -i "" "s/{{ENVIRONMENT_KIND_SLUG}}/sandbox/g" build/sandbox/{{TEAM}}/scripts/main.js',
+            'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{TEAM}}/g" build/sandbox/{{TEAM}}/scripts/main.js'
+          ];
+
+          return teamify(commands);
+        })()
+      }
+    },
+
+    watch: {
+      scripts: {
+        files: 'app/scripts/*.js',
+        tasks: ['build:test', 'build:scripts']
+      },
+
+      styles: {
+        files: ['app/styles/*.scss'],
+        tasks: ['build:styles']
       }
     }
   });
@@ -149,7 +164,7 @@ module.exports = function(grunt) {
     'grunt-shell'
   ].forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('default', ['connect:server', 'watch']);
+  grunt.registerTask('default', ['build', 'connect', 'watch']);
 
   grunt.registerMultiTask('build', function() {
     grunt.task.run(this.data);
