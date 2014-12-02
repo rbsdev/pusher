@@ -1,6 +1,7 @@
 var Ajax = require('./ajax.js');
 var Env = require('./env.js');
 var Template = require('./template.js');
+var Tracker = require('./tracker.js');
 
 var List = {
   url: Env.service.NEWS,
@@ -33,6 +34,7 @@ var List = {
         element.addEventListener('click', function(e) {
           e.preventDefault();
           chrome.tabs.create( { url: element.href } );
+          Tracker.trigger(Env.TEAM_SLUG, element.href);
         }, false);
       });
     };

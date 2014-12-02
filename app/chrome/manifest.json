@@ -6,7 +6,7 @@
     "permissions": [
     	"http://*.clicrbs.com.br/",
     	"http://homologacaonovo.clicrbs.com.br/",
-    	"http://www.google-analytics.com/"
+    	"https://ssl.google-analytics.com/"
   	],
   	"icons": { 
 			"16": "img/16x16.png",
