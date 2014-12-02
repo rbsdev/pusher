@@ -1,19 +1,19 @@
-var teamify = function(commands) {
-  var parse = function(team, command, index, commands) {
-    return command.replace(/\{\{TEAM\}\}/g, team);
-  };
-
-  return [ ].concat(commands.map(parse.bind(null, 'gremio')),
-                    commands.map(parse.bind(null, 'inter')))
-            .join('; ');
-};
-
-var files = {
-  js: ['app/js/list.js', 'app/js/template.js', 'app/js/ajax.js', 'app/js/humanize-date.js']
-}
-
 module.exports = function(grunt) {
     'use strict';
+
+    var teamify = function(commands) {
+      var parse = function(team, command, index, commands) {
+        return command.replace(/\{\{TEAM\}\}/g, team);
+      };
+
+      return [ ].concat(commands.map(parse.bind(null, 'gremio')),
+                              commands.map(parse.bind(null, 'inter')))
+                  .join('; ');
+    };
+
+    var files = {
+      js: ['app/js/list.js', 'app/js/template.js', 'app/js/ajax.js', 'app/js/humanize-date.js']
+    };
 
     grunt.initConfig({
         pkg: require('./package'),
@@ -92,6 +92,7 @@ module.exports = function(grunt) {
           clean: {
             command: 'rm -fr build/*'
           },
+
           tree: {
             command: (function() {
               var commands = [
@@ -137,6 +138,7 @@ module.exports = function(grunt) {
         'grunt-contrib-watch',
         'grunt-browserify',
         'grunt-contrib-connect',
+        'grunt-contrib-jasmine',
         'grunt-shell'
     ].forEach(grunt.loadNpmTasks);
 
