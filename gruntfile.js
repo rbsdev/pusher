@@ -92,6 +92,7 @@ module.exports = function(grunt) {
           clean: {
             command: 'rm -fr build/*'
           },
+
           tree: {
             command: (function() {
               var commands = [
@@ -137,6 +138,7 @@ module.exports = function(grunt) {
         'grunt-contrib-watch',
         'grunt-browserify',
         'grunt-contrib-connect',
+        'grunt-contrib-jasmine',
         'grunt-shell'
     ].forEach(grunt.loadNpmTasks);
 
