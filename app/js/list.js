@@ -18,7 +18,7 @@ var List = {
 
     var onSuccess = function(datas) {
       var html = Template.compile(this.html, datas);
-      element.innerHTML = html;
+      this.element.innerHTML = html;
     };
 
     Ajax.get({
