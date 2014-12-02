@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "bourbon": "~3.2.3",
+    "normalize-scss": "~3.0.2"
+  },
+  "name": "zh-grenal"
+}
