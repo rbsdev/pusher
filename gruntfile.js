@@ -26,16 +26,14 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            files: ['<%= jshint.files %>'],
-            tasks: ['jshint']
+            // files: ['<%= jshint.files %>'],
+            // tasks: ['jshint']
         },
 
         connect: {
             server: {
                 options: {
-                    hostname: '127.0.0.1',
                     port: 8888,
-                    base: '.',
                     keepalive: false
                 }
             }
@@ -47,9 +45,10 @@ module.exports = function(grunt) {
         'grunt-contrib-jshint',
         'grunt-contrib-uglify',
         'grunt-contrib-jasmine',
-        'grunt-browserify',
+        'grunt-contrib-watch',
+        'grunt-browserify'
     ].forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('default', ['jshint', 'uglify', 'browserify']);
+  grunt.registerTask('default', ['uglify', 'browserify', 'connect:server', 'watch']);
 
 };
