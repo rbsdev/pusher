@@ -1,6 +1,3 @@
-var date =  Date.parse(news.date.replace(/^([0-9]{4}-[0-9]{2}-[0-9]{2}):([0-9]{2}:[0-9]{2}:[0-9]{2})$/, '$1T$2.000-02:00'));
-var now  = Date.now();
-
 var pluralize = function(amount, singular, plural) {
   if (amount == 1) {
     return singular;
@@ -14,7 +11,14 @@ var human = function(params) {
                                                     .replace('{{ KIND }}', params.kind);
 };
 
-var HumanizeDate = function(seconds) {
+var HumanizeDate = {
+  timestamp: function(date) {
+    return Date.parse(date.replace(/^([0-9]{4}-[0-9]{2}-[0-9]{2}):([0-9]{2}:[0-9]{2}:[0-9]{2})$/, '$1T$2.000-02:00'));
+  },
+
+  update: function(timestamp) {
+    var now = date.now();
+    var seconds = ((now - timestamp) / 1000);
     var amount = seconds / 31556900 >> 0;
 
     if (amount) {
@@ -70,4 +74,7 @@ var HumanizeDate = function(seconds) {
     }
 
     return 'Agora';
-  };
+  }
+};
+
+module.exports = HumanizeDate;
