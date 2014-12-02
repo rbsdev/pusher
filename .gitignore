@@ -24,11 +24,12 @@ $RECYCLE.BIN/
 .mtj.tmp/
 .Spotlight-V100
 .Trashes
-build/
+app/css/*
+!app/css/main.css
 app/js/build.js
 app/js/build.min.js
 app/vendor
-app/css
+build/
 coverage
 Desktop.ini
 ehthumbs.db
