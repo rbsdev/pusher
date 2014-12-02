@@ -25,7 +25,7 @@ var List = {
         url: url,
         success: onSuccess.bind(this)
     });
-  },    
+  }
 };
 
 module.exports = List;

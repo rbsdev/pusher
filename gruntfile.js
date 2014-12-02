@@ -7,7 +7,7 @@ module.exports = function(grunt) {
         pkg: require('./package'),
 
         jshint: {
-            all: 'app/js/*.js'
+            all: ['app/js/list.js', 'app/js/template.js', 'app/js/ajax.js']
         },
 
         uglify: {
@@ -76,6 +76,6 @@ module.exports = function(grunt) {
         'grunt-contrib-connect',
     ].forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('default', ['uglify', 'browserify', 'connect:server', 'watch']);
+  grunt.registerTask('default', ['uglify', 'browserify', 'connect:server', 'jshint', 'watch']);
 
 };
