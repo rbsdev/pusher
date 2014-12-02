@@ -8,7 +8,7 @@ var pluralize = function(amount, singular, plural) {
 
 var human = function(params) {
   return 'Há {{ AMOUNT }} {{ KIND }}'.replace('{{ AMOUNT }}', params.amount)
-                                                    .replace('{{ KIND }}', params.kind);
+                                                   .replace('{{ KIND }}', params.kind);
 };
 
 var HumanizeDate = {
@@ -17,7 +17,7 @@ var HumanizeDate = {
   },
 
   update: function(timestamp) {
-    var now = date.now();
+    var now = Date.now();
     var seconds = ((now - timestamp) / 1000);
     var amount = seconds / 31556900 >> 0;
 
