@@ -1,5 +1,5 @@
 @import "../vendor/bourbon/dist/bourbon";
-@import "../vendor/normalize-scss/_normalize";
+@import "reset";
 
 
 @import "_fonts";
@@ -8,4 +8,10 @@
 // Temporario
 html {
 	width: 360px;
+	border: 1px solid #CCC;
+}
+
+body {
+	font-size: 14px;
+	-webkit-font-smoothing: antialiased;
 }

@@ -4,5 +4,20 @@ header {
 
 	h1 {
 		text-align: center;
+		height: 85px;
+		line-height: 85px;
+		color: #FFF;
+		letter-spacing: -0.8px;
+		font-size: 30px;
+		@include font("mont-bold");
+
+		span {
+			position: relative;
+			left: 5px;
+			width: 38px;
+			height: 21px;
+			display: inline-block;
+			background: url(../img/zh.svg) no-repeat;
+		}
 	}
 }
