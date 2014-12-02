@@ -6,7 +6,7 @@ module.exports = function(grunt) {
         pkg: require('./package'),
 
         jshint: {
-            all: 'app/js/*.js'
+            all: 'app/js/list.js'
         },
 
         uglify: {

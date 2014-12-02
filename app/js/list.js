@@ -42,9 +42,9 @@ var List = {
     '<li>',
       '<a href="{{ URL }}"><img src="{{ SRC }}"></a>',
       '<a href="{{ URL }}">{{ TITLE }}></a>',
-      '<span>{{ DATE }}</span>'
+      '<span>{{ DATE }}</span>',
     '</li>'
-  ].join('')
+  ].join(''),
 
   get: function() {
     var url = this.url;
