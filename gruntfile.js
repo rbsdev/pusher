@@ -8,6 +8,9 @@ var teamify = function(commands) {
             .join('; ');
 };
 
+// {{ENVIRONMENT_KIND_SLUG}}
+// {{ENVIRONMENT_TEAM_SLUG}}
+
 module.exports = function(grunt) {
     'use strict';
 
@@ -17,6 +20,9 @@ module.exports = function(grunt) {
         pkg: require('./package'),
 
         build: {
+          test: ['jshint'],
+          styles: ['sass'],
+          scripts: ['browserify', 'uglify'],
           clean: ['shell:clean'],
           tree: ['shell:tree'],
           pack: ['shell:packChrome']
@@ -47,12 +53,12 @@ module.exports = function(grunt) {
             // tasks: ['jshint']
             js: {
               files: ['app/js/main.js', 'app/js/list.js', 'app/js/template.js', 'app/js/ajax.js'],
-              tasks: ['jshint', 'browserify', 'uglify']
+              tasks: ['build:test', 'build:scripts']
             },
 
             css: {
               files: [ "app/styles/*.scss" ],
-              tasks: ["sass"]
+              tasks: ["build:styles"]
             }
         },
 
@@ -104,10 +110,19 @@ module.exports = function(grunt) {
             command: (function() {
               var commands = [
                 'cp app/chrome/manifest.json build/chrome/{{TEAM}}/manifest.json',
-                'cp -R app/css/ build/chrome/{{TEAM}}/css/',
+
+                'mkdir -p build/chrome/{{TEAM}}/css',
+                'cp app/css/{{TEAM}}.min.css build/chrome/{{TEAM}}/css/main.css',
+
                 'cp -R app/img/ build/chrome/{{TEAM}}/img/',
                 'cp app/index.html build/chrome/{{TEAM}}/index.html',
-                'cp app/js/build.min.js build/chrome/{{TEAM}}/js/build.min.js'
+
+                'mkdir -p build/chrome/{{TEAM}}/js',
+                'cp app/js/build.js build/chrome/{{TEAM}}/js/build.js',
+                'cp app/js/build.min.js build/chrome/{{TEAM}}/js/build.min.js',
+
+                'sed -i "" "s/{{ENVIRONMENT_KIND_SLUG}}/chrome/g" build/chrome/{{TEAM}}/js/build.js build/chrome/{{TEAM}}/js/build.min.js',
+                'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{TEAM}}/g" build/chrome/{{TEAM}}/js/build.js build/chrome/{{TEAM}}/js/build.min.js'
               ];
 
               return teamify(commands);
