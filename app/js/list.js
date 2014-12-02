@@ -3,7 +3,7 @@ var Template = require('./template.js');
 
 
 var List = {
-  url: 'http://172.20.92.64:8080/pusher-data-service/api/news/list/gremio?size=20&hl=1',
+  url: 'http://homologacaonovo.clicrbs.com.br/pusher-data-service/api/news/list/gremio?size=20&hl=1',
   element: document.getElementById('list-news'),
   html: [
     '<li>',

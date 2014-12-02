@@ -28,10 +28,22 @@ module.exports = function(grunt) {
         watch: {
             files: ['<%= jshint.files %>'],
             tasks: ['jshint']
+        },
+
+        connect: {
+            server: {
+                options: {
+                    hostname: '127.0.0.1',
+                    port: 8888,
+                    base: '.',
+                    keepalive: false
+                }
+            }
         }
     });
 
     [
+        'grunt-contrib-connect',
         'grunt-contrib-jshint',
         'grunt-contrib-uglify',
         'grunt-contrib-jasmine',
