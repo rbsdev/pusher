@@ -30,7 +30,7 @@ module.exports = function(grunt) {
             // files: ['<%= jshint.files %>'],
             // tasks: ['jshint']
             js: {
-              files: ['app/js/list.js', 'app/js/list.js', 'app/js/template.js', 'app/js/ajax.js'],
+              files: ['app/js/main.js', 'app/js/list.js', 'app/js/template.js', 'app/js/ajax.js'],
               tasks: ['jshint', 'browserify', 'uglify']
             },
 
