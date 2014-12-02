@@ -1,4 +1,5 @@
 module.exports = function(grunt) {
+
     'use strict';
 
     grunt.initConfig({
@@ -8,12 +9,25 @@ module.exports = function(grunt) {
             all: 'app/js/*.js'
         },
 
+        uglify: {
+            build: {
+                files: {
+                    'app/js/build.min.js': 'build.js'
+                }
+            }
+        },
+
         browserify: {
             dist: {
                 files: {
                     'app/js/build.js': 'app/js/*.js'
                 }
             }
+        },
+
+        watch: {
+            files: ['<%= jshint.files %>'],
+            tasks: ['jshint']
         }
     });
 
@@ -24,5 +38,6 @@ module.exports = function(grunt) {
         'grunt-browserify',
     ].forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('default', [ ]);
+  grunt.registerTask('default', ['jshint', 'uglify']);
+
 };
