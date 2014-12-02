@@ -8,13 +8,8 @@ var teamify = function(commands) {
             .join('; ');
 };
 
-// {{ENVIRONMENT_KIND_SLUG}}
-// {{ENVIRONMENT_TEAM_SLUG}}
-
 module.exports = function(grunt) {
     'use strict';
-
-    var isProduction = process.argv.indexOf("--production") != -1;
 
     grunt.initConfig({
         pkg: require('./package'),
@@ -65,14 +60,14 @@ module.exports = function(grunt) {
         sass: {
           main: {
             options: {
-              outputStyle: isProduction ? 'compressed' : 'nested',
-              sourceMap: !isProduction
+              outputStyle: 'compressed',
+              sourceMap: false
             },
 
             files: [{
               cwd: '.',
               expand: true,
-              ext: '.min.css',
+              ext: '.css',
               flatten: true,
               src: ["app/styles/*.scss"],
               dest: "app/css"
@@ -112,7 +107,7 @@ module.exports = function(grunt) {
                 'cp app/chrome/manifest.json build/chrome/{{TEAM}}/manifest.json',
 
                 'mkdir -p build/chrome/{{TEAM}}/css',
-                'cp app/css/{{TEAM}}.min.css build/chrome/{{TEAM}}/css/main.css',
+                'cp app/css/{{TEAM}}.css build/chrome/{{TEAM}}/css/main.css',
 
                 'cp -R app/img/ build/chrome/{{TEAM}}/img/',
                 'cp app/index.html build/chrome/{{TEAM}}/index.html',
