@@ -38,6 +38,6 @@ module.exports = function(grunt) {
         'grunt-browserify',
     ].forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('default', ['jshint', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'uglify', 'browserify']);
 
 };

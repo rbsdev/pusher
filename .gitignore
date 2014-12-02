@@ -25,6 +25,7 @@ $RECYCLE.BIN/
 .Spotlight-V100
 .Trashes
 build/
+app/js/build.js
 coverage
 Desktop.ini
 ehthumbs.db
