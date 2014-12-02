@@ -1,22 +1,25 @@
 var Ajax = {
   get: function(params) {
     var request = new XMLHttpRequest();
-    request('GET', params.url, false);
 
     var onReady = function(e) {
-        var isReady = request.readyState == 4;
+      var isReady = request.readyState == 4;
 
-        if (isReady) {
-            if (request.status == 200) {
-                params.success(request.response);
-                return false;
-            }
+      if ( !isReady) return;
 
-            params.error();
-        }
+      if (request.status == 200) {
+        var datas = JSON.parse(request.response);
+        params.success(datas);
+
+        return;
+      }
+
+      params.error();
     };
 
     request.onreadystatechange = onReady;
+    request.open('GET', params.url);
+    request.send(null);
   }
 };
 

@@ -7,13 +7,13 @@ module.exports = function(grunt) {
         pkg: require('./package'),
 
         jshint: {
-            all: ['app/js/list.js', 'app/js/template.js', 'app/js/ajax.js']
+            all: ['app/js/list.js', 'app/js/list.js', 'app/js/template.js', 'app/js/ajax.js']
         },
 
         uglify: {
             build: {
                 files: {
-                    'app/js/build.min.js': 'build.js'
+                    'app/js/build.min.js': 'app/js/build.js'
                 }
             }
         },
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         browserify: {
             dist: {
                 files: {
-                    'app/js/build.js': 'app/js/*.js'
+                    'app/js/build.js': ['app/js/main.js']
                 }
             }
         },
@@ -30,8 +30,8 @@ module.exports = function(grunt) {
             // files: ['<%= jshint.files %>'],
             // tasks: ['jshint']
             js: {
-              files: [ 'app/js/*.js' ],
-              tasks: ['jshint']
+              files: 'app/js/*.js',
+              tasks: ['jshint', 'browserify', 'uglify']
             },
 
             css: {
@@ -46,6 +46,7 @@ module.exports = function(grunt) {
               outputStyle: isProduction ? 'compressed' : 'nested',
               sourceMap: !isProduction
             },
+
             files: [{
               cwd: '.',
               expand: true,
@@ -73,9 +74,9 @@ module.exports = function(grunt) {
         'grunt-contrib-jasmine',
         'grunt-contrib-watch',
         'grunt-browserify',
-        'grunt-contrib-connect',
+        'grunt-contrib-connect'
     ].forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('default', ['uglify', 'browserify', 'connect:server', 'jshint', 'watch']);
+  grunt.registerTask('default', ['connect:server', 'watch']);
 
 };

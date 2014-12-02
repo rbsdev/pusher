@@ -26,6 +26,7 @@ $RECYCLE.BIN/
 .Trashes
 build/
 app/js/build.js
+app/js/build.min.js
 app/vendor
 app/css
 coverage
