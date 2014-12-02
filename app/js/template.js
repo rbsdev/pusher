@@ -8,10 +8,11 @@ var Template = {
       var timestamp = HumanizeDate.timestamp(element.date);
       var humanizedTime = HumanizeDate.update(timestamp);
 
-      output += html.replace('{{ SRC }}', element.thumb)
-                             .replace(/\{\{ URL \}\}/gi, element.link)
-                             .replace('{{ TITLE }}', element.title)
-                             .replace('{{ DATE }}', humanizedTime);
+      output += html.replace('{{ SRC }}', element['original-thumb'])
+                    .replace(/\{\{ URL \}\}/gi, element['link-desktop'])
+                    .replace('{{ TAG }}', element.tag)
+                    .replace(/\{\{ TITLE \}\}/gi, element.title)
+                    .replace(/\{\{ DATE \}\}/gi, humanizedTime);
     });
 
     return output;

@@ -2,15 +2,23 @@ var Ajax = require('./ajax.js');
 var Env = require('./env.js');
 var Template = require('./template.js');
 
-
 var List = {
   url: Env.service.NEWS,
   element: document.getElementById('list-news'),
   html: [
     '<li>',
-      '<a href="{{ URL }}"><img src="{{ SRC }}"></a>',
-      '<a href="{{ URL }}">{{ TITLE }}></a>',
-      '<span>{{ DATE }}</span>',
+      '<div class="photo">',
+        '<a href="{{ URL }}" title="{{ TITLE }}">',
+          '<img src="{{ SRC }}?w=100&h=100&a=c"',
+        '</a>',
+      '</div>',
+      '<div class="content">',
+        '<a href="{{ URL }}">',
+            '<h3>{{ TAG }}</h3>',
+            '<h2>{{ TITLE }}</h2>',
+            '<time datetime="{{ DATE }}">{{ DATE }}</time>',
+        '</a>',
+      '</div>',
     '</li>'
   ].join(''),
 
