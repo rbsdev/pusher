@@ -1,12 +1,13 @@
 module.exports = function(grunt) {
-
     'use strict';
+
+    var isProduction = process.argv.indexOf("--production") != -1;
 
     grunt.initConfig({
         pkg: require('./package'),
 
         jshint: {
-            all: 'app/js/list.js'
+            all: 'app/js/*.js'
         },
 
         uglify: {
@@ -28,6 +29,32 @@ module.exports = function(grunt) {
         watch: {
             // files: ['<%= jshint.files %>'],
             // tasks: ['jshint']
+            js: {
+              files: [ 'app/js/*.js' ],
+              tasks: ['jshint']
+            },
+
+            css: {
+              files: [ "app/styles/*.scss" ],
+              tasks: ["sass"]
+            }
+        },
+
+        sass: {
+          main: {
+            options: {
+              outputStyle: isProduction ? 'compressed' : 'nested',
+              sourceMap: !isProduction
+            },
+            files: [{
+              cwd: '.',
+              expand: true,
+              ext: '.min.css',
+              flatten: true,
+              src: ["app/styles/*.scss"],
+              dest: "app/css"
+            }]
+          }
         },
 
         connect: {
@@ -40,13 +67,13 @@ module.exports = function(grunt) {
         }
     });
 
-    [
-        'grunt-contrib-connect',
+    [   'grunt-sass',
         'grunt-contrib-jshint',
         'grunt-contrib-uglify',
         'grunt-contrib-jasmine',
         'grunt-contrib-watch',
-        'grunt-browserify'
+        'grunt-browserify',
+        'grunt-contrib-connect',
     ].forEach(grunt.loadNpmTasks);
 
   grunt.registerTask('default', ['uglify', 'browserify', 'connect:server', 'watch']);
