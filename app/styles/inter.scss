@@ -2,6 +2,14 @@
 
 $inter-color: #dd1a31;
 
+body:after {
+	content: " ";
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	border-bottom: 6px solid $inter-color;
+}
+
 h1 {
 	background-color: $inter-color;
 }

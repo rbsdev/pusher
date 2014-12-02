@@ -2,6 +2,14 @@
 
 $gremio-color: #2391e6;
 
+body:after {
+	content: " ";
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	border-bottom: 6px solid $gremio-color;
+}
+
 h1 {
 	background-color: $gremio-color;
 }
