@@ -1,3 +1,11 @@
 @import "../vendor/bourbon/dist/bourbon";
 @import "../vendor/normalize-scss/_normalize";
 
+
+@import "_fonts";
+@import "_header";
+
+// Temporario
+html {
+	width: 360px;
+}

@@ -27,6 +27,7 @@ $RECYCLE.BIN/
 build/
 app/js/build.js
 app/vendor
+app/css
 coverage
 Desktop.ini
 ehthumbs.db
