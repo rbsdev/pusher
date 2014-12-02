@@ -49,6 +49,9 @@ public class ZHRepository {
 		
 		private Teams( final String teamName, final Long id ) {
 			
+			this.id = id;
+			this.teamName = teamName;
+			
 		}
 
 		public Long getId() {
@@ -87,6 +90,10 @@ public class ZHRepository {
 	}
 	
 	protected void buildServiceUrlByTeam(final Teams team,final Integer size, final Integer hl ) {
+		
+		System.out.println("ZH_PUBLIC_NEWS_LIST = " + ZH_PUBLIC_NEWS_LIST);
+		
+		System.out.println("hl=" + hl + " size " + size +" team " + team);
 		
 		this.serviceURL = ZH_PUBLIC_NEWS_LIST.replaceAll("\\{id}",team.getId().toString())
 				 							 .replaceAll("\\{hl}",hl.toString())

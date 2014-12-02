@@ -31,6 +31,11 @@ public class PusherList {
 		
 		if (repo == null) {
 			try {
+				
+				System.out.println("-team-> " + team.toUpperCase());
+				
+				System.out.println("-team-enum-->" + ZHRepository.Teams.valueOf(team.toUpperCase()));
+				
 				repo = new ZHRepository(ZHRepository.Teams.valueOf(team.toUpperCase()), size, hl);
 			} catch (Exception e) {
 				PusherException pusherRepoError = new PusherException(Errors.NEWS_REPO_ERROR);
