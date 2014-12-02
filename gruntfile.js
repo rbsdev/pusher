@@ -8,6 +8,10 @@ var teamify = function(commands) {
             .join('; ');
 };
 
+var files = {
+  js: ['app/js/list.js', 'app/js/template.js', 'app/js/ajax.js', 'app/js/humanize-date.js']
+}
+
 module.exports = function(grunt) {
     'use strict';
 
@@ -24,7 +28,7 @@ module.exports = function(grunt) {
         },
 
         jshint: {
-            all: ['app/js/list.js', 'app/js/list.js', 'app/js/template.js', 'app/js/ajax.js']
+            all: files.js
         },
 
         uglify: {
@@ -47,7 +51,7 @@ module.exports = function(grunt) {
             // files: ['<%= jshint.files %>'],
             // tasks: ['jshint']
             js: {
-              files: ['app/js/main.js', 'app/js/list.js', 'app/js/template.js', 'app/js/ajax.js'],
+              files: files.js,
               tasks: ['build:test', 'build:scripts']
             },
 
