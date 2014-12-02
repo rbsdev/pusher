@@ -3,7 +3,7 @@ var Env = {
   TEAM_SLUG: '{{ENVIRONMENT_TEAM_SLUG}}',
 
   service: {
-    NEWS: '{{ENVIRONMENT_SERVICE_NEWS}}'
+    NEWS: '//homologacaonovo.clicrbs.com.br/pusher-data-service/api/news/list/gremio?size=20&hl=1'
   }
 };
 

@@ -1,9 +1,10 @@
 var Ajax = require('./ajax.js');
+var Env = require('./env.js');
 var Template = require('./template.js');
 
 
 var List = {
-  url: 'http://homologacaonovo.clicrbs.com.br/pusher-data-service/api/news/list/gremio?size=20&hl=1',
+  url: Env.service.NEWS,
   element: document.getElementById('list-news'),
   html: [
     '<li>',

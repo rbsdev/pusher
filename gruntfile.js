@@ -12,6 +12,9 @@ var files = {
   js: ['app/js/list.js', 'app/js/template.js', 'app/js/ajax.js', 'app/js/humanize-date.js']
 }
 
+// {{ENVIRONMENT_KIND_SLUG}}
+// {{ENVIRONMENT_TEAM_SLUG}}
+
 module.exports = function(grunt) {
     'use strict';
 
@@ -120,7 +123,10 @@ module.exports = function(grunt) {
 
                 'mkdir -p build/chrome/{{TEAM}}/js',
                 'cp app/js/build.js build/chrome/{{TEAM}}/js/build.js',
-                'cp app/js/build.min.js build/chrome/{{TEAM}}/js/build.min.js'
+                'cp app/js/build.min.js build/chrome/{{TEAM}}/js/build.min.js',
+
+                'sed -i "" "s/{{ENVIRONMENT_KIND_SLUG}}/chrome/g" build/chrome/{{TEAM}}/js/build.js build/chrome/{{TEAM}}/js/build.min.js',
+                'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{TEAM}}/g" build/chrome/{{TEAM}}/js/build.js build/chrome/{{TEAM}}/js/build.min.js'
               ];
 
               return teamify(commands);
