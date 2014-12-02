@@ -8,8 +8,12 @@
     	"http://homologacaonovo.clicrbs.com.br/",
     	"http://www.google-analytics.com/"
   	],
+  	"icons": { 
+			"16": "img/16x16.png",
+      "48": "img/48x48.png",
+      "128": "img/128x128.png"
+    },
     "browser_action": {
-      "default_icon": "img/favicon.ico",
       "default_popup": "index.html"
     }
 }
