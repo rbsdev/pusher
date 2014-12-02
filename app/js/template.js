@@ -3,10 +3,10 @@ var Template = {
     var output = '';
 
     datas.forEach(function(element, index) {
-      output += html.replace('{{ SRC }}', element.thumb);
-      output += html.replace('/{{ URL }}/gi', element.link);
-      output += html.replace('{{ TITLE }}', element.title);
-      output += html.replace('{{ DATE }}', element.date);
+      output += html.replace('{{ SRC }}', element.thumb)
+                             .replace(/\{\{ URL \}\}/gi, element.link)
+                             .replace('{{ TITLE }}', element.title)
+                             .replace('{{ DATE }}', element.date);
     });
 
     return output;
