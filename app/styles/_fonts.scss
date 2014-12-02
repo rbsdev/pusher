@@ -1,0 +1,21 @@
+@import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:400|Open+Sans+Condensed:300|Montserrat:400,700");
+
+@mixin font($f) {
+
+  @if ($f == "source-regular") {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+
+  } @else if ($f == "open") {
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-weight: 300;
+
+  } @else if ($f == "mont") {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+
+  } @else if ($f == "mont-bold") {
+  	font-family: 'Montserrat', sans-serif;
+  	font-weight: 700;
+  }
+}
