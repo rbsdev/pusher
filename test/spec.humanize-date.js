@@ -21,15 +21,22 @@ describe('template', function() {
         expect(HumanizeDate.update(Date.now())).toEqual( "Agora"   ); 
      });
     
-    it('should return exactly one minute ago value', function() {
-       expect(HumanizeDate.update(Date.now()-(24*60*60))).toEqual( "Há 1 minuto"   ); 
+    it('should return exactly x minute ago value', function() {
+       var scale = 24*60*60;
+       for (i=1; i < 3 ; i++) {
+    	   expect(HumanizeDate.update(Date.now()-(scale)*i)).toEqual( "Há "+(i)+" minuto"+(i==1?"":"s")); 
+       }
     });
     
-    it('should return exactly one hour ago value', function() {
+    it('should return exactly x hour ago value', function() {
         expect(HumanizeDate.update(Date.now()-(24*60*60*60))).toEqual( "Há 1 hora"   ); 
     });
     
-    it('should return exactly one day ago value', function() {
+    it('should return exactly x day ago value', function() {
+        expect(HumanizeDate.update(Date.now()-(24*60*60*60*24))).toEqual( "Há 1 dia"   ); 
+    });
+    
+    it('should return exactly x month ago value', function() {
         expect(HumanizeDate.update(Date.now()-(24*60*60*60*24))).toEqual( "Há 1 dia"   ); 
     });
     
