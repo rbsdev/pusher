@@ -1,4 +1,4 @@
-var Template = require('../app/js/template.js');
+var Template = require('../app/scripts/template.js');
 
 describe('template', function() {
   describe('instance', function() {

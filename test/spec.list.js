@@ -1,4 +1,4 @@
-var List = require('../app/js/List.js');
+var List = require('../app/scripts/List.js');
 
 describe('list', function() {
   describe('instance', function() {

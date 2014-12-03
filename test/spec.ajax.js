@@ -1,4 +1,4 @@
-var Ajax = require('../app/js/ajax.js');
+var Ajax = require('../app/scripts/ajax.js');
 
 describe('ajax', function() {
   describe('instance', function() {
