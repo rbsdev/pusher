@@ -53,10 +53,13 @@ var List = {
   },
 
   getNews: function() {
+    var url = this.url;
+    var process = this.process.bind(this);
+
     setInterval(function() {
       Ajax.get({
         url: url,
-        success: this.process.bind(this)
+        success: process
       });
     }, 600000); // 10 minutes
   },
@@ -64,7 +67,7 @@ var List = {
   process: function(data) {
     var hasNews = this.currentData && this.currentData[0].id !== data[0].id;
 
-    if ( !hasNews) return;
+    if (hasNews === false) return;
 
     this.currentData = data;
     var html = Template.compile(this.html, data);
