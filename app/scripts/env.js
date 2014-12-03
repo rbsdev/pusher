@@ -20,9 +20,11 @@ Env.isWindowsKind = Env.KIND_SLUG == 'windows';
 if (Env.isGremioTeam) {
   Env.TEAM_NAME = 'Grêmio';
   Env.TEAM_NICK = 'Gremista';
+  Env.TEAM_LINK = 'http://zh.clicrbs.com.br/rs/esportes/gremio';
 } else if (Env.isInterTeam) {
   Env.TEAM_NAME = 'Inter';
   Env.TEAM_NICK = 'Colorado';
+  Env.TEAM_LINK = 'http://zh.clicrbs.com.br/rs/esportes/inter';
 }
 
 module.exports = Env;

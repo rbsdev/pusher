@@ -8,7 +8,8 @@ describe('template', function() {
     });
 
     it('should has compile as method', function() {
-      expect(Template.compile).toDefined();
+      var isFunction = typeof(Template.compile) === 'function';
+      expect(isFunction).toBeTruthy();
     });
   });
 });
