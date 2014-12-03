@@ -33,7 +33,13 @@ var List = {
       lists.forEach(function(element, index) {
         element.addEventListener('click', function(e) {
           e.preventDefault();
-          chrome.tabs.create( { url: element.href } );
+
+          if (Env.isSandboxKind) {
+            window.open(element.href);
+          } else {
+            chrome.tabs.create( { url: element.href } );
+          }
+
           Tracker.trigger(Env.TEAM_SLUG, element.href);
         }, false);
       });
