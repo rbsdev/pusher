@@ -65,7 +65,7 @@ public class ZHRepositoryTest extends ZHRepository {
 		fakeResponseBuilder.append("\"link-mobile\": \""+linkMobilValue+"\"");
 		fakeResponseBuilder.append("}]}");
 		
-		repo.urlContent = fakeResponseBuilder.toString();
+		repo.newsUrlContent = fakeResponseBuilder.toString();
 	}
 
 	@Test

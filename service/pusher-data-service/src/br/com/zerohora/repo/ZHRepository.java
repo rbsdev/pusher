@@ -35,9 +35,14 @@ public class ZHRepository {
 								+ "&sectid={id}&site=zerohora"
 								+ "&highlight={hl}&originalthumb=true&device=false"
 								+ "&size={size}&includelink=true";
+	
+	protected static final String 
+						ZH_PUBLIC_MATCH_LIST = "http://zh.clicrbs.com.br/temporeal-2014/api/match/currentByTeam/zerohora?team={team}";
 
-	protected String serviceURL;
-	protected String urlContent;
+	protected String newsServiceURL;
+	protected String matchServiceURL;
+	protected String newsUrlContent;
+	protected String matchUrlContent;
 	
 	/** Type of Teams */
 	public enum Teams {
@@ -63,22 +68,27 @@ public class ZHRepository {
 	}
 
 	public ZHRepository( final Teams team, final Integer size, final Integer hl ) {
-		this.buildServiceUrlByTeam(team, size, hl);
-		this.buildUrlContent(this.serviceURL);
+		this.buildNewsServiceUrlByTeam(team, size, hl);
+		newsUrlContent = this.buildUrlContent(this.newsServiceURL);
+		matchUrlContent = this.buildUrlContent(this.matchServiceURL);
 	}
 	
 	public ZHRepository() {}
 	
 	public JSONArray getNews() {
-		return ((JSONObject)JSONSerializer.toJSON(urlContent)).getJSONArray("news");  
+		return ((JSONObject)JSONSerializer.toJSON(newsUrlContent)).getJSONArray("news");  
+	}
+	
+	public JSONObject getMatch() {
+		return ((JSONObject)JSONSerializer.toJSON(matchUrlContent)).getJSONArray("games").getJSONObject(0);  
 	}
 
-	protected void buildUrlContent(final String url) {
+	protected String buildUrlContent(final String url) {
 		try {
 			final InputStream is = new URL(url).openStream();
 		    try {
 		      final BufferedReader rd = new BufferedReader(new InputStreamReader(is, Charset.forName("UTF-8")));
-		      this.urlContent = readAll(rd);
+		      return readAll(rd);
 		    } finally {
 		      is.close();
 		    }
@@ -87,13 +97,18 @@ public class ZHRepository {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 	
-	protected void buildServiceUrlByTeam(final Teams team,final Integer size, final Integer hl ) {
+	protected void buildNewsServiceUrlByTeam(final Teams team,final Integer size, final Integer hl ) {
 		
-		this.serviceURL = ZH_PUBLIC_NEWS_LIST.replaceAll("\\{id}",team.getId().toString())
+		this.newsServiceURL = ZH_PUBLIC_NEWS_LIST.replaceAll("\\{id}",team.getId().toString())
 				 							 .replaceAll("\\{hl}",hl.toString())
 				 							 .replaceAll("\\{size}", size.toString());
+	}
+	
+	protected void buildMatchServiceUrlByTeam(final Teams team ) {
+		this.matchServiceURL = ZH_PUBLIC_MATCH_LIST.replaceAll("\\{team}", team.getTeamName());
 	}
 	
 	private static String readAll(Reader rd) throws IOException {
