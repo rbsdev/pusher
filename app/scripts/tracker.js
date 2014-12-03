@@ -1,6 +1,6 @@
 var Tracker = {
   trigger: function() {
-    _gaq.push(['_trackEvent', 'Cliques Extencoes - ZH'].concat([ ].slice.call(arguments)));
+    _gaq.push(['_trackEvent', 'Cliques Extensoes - ZH'].concat([ ].slice.call(arguments)));
   }
 };
 
