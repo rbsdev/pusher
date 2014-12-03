@@ -17,11 +17,21 @@ describe('template', function() {
       expect(isFunction).toBeTruthy();
     });
     
-    
     it('should return exactly now timestamp value', function() {
         expect(HumanizeDate.update(Date.now())).toEqual( "Agora"   ); 
      });
     
+    it('should return exactly one minute ago value', function() {
+       expect(HumanizeDate.update(Date.now()-(24*60*60))).toEqual( "Há 1 minuto"   ); 
+    });
+    
+    it('should return exactly one hour ago value', function() {
+        expect(HumanizeDate.update(Date.now()-(24*60*60*60))).toEqual( "Há 1 hora"   ); 
+    });
+    
+    it('should return exactly one day ago value', function() {
+        expect(HumanizeDate.update(Date.now()-(24*60*60*60*24))).toEqual( "Há 1 dia"   ); 
+    });
     
   });
 });
