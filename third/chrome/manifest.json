@@ -1,20 +1,21 @@
 {
-    "manifest_version": 2,
-    "name": "ZH Grenal",
-    "description": "",
-    "version": "1.0",
-    "permissions": [
-    	"http://*.clicrbs.com.br/",
-    	"http://homologacaonovo.clicrbs.com.br/",
-    	"https://ssl.google-analytics.com/"
-  	],
-  	"icons": { 
-			"16": "img/16x16.png",
-      "48": "img/48x48.png",
-      "128": "img/128x128.png"
-    },
-    "browser_action": {
-      "default_popup": "index.html"
-    },
-    "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "description": "",
+  "icons": {
+    "16": "img/16x16.png",
+    "48": "img/48x48.png",
+    "128": "img/128x128.png"
+  },
+  "manifest_version": 2,
+  "name": "ZH Grenal",
+  "permissions": [
+    "http://*.clicrbs.com.br/",
+    "http://*.google-analytics.com/",
+    "http://*.googleapis.com/",
+    "http://*.gstatic.com/"
+  ],
+  "version": "0.0.1"
 }
