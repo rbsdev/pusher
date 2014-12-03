@@ -7,11 +7,13 @@
 @import "_news";
 
 
+body, html {
+  width: 360px;
+  min-height: 500px;
+}
 
 body {
 	font-size: 14px;
 	-webkit-font-smoothing: antialiased;
 	margin-top: 85px;
-	width:320px;
-	min-height: 500px;
 }

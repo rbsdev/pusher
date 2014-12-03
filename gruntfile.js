@@ -132,6 +132,7 @@ module.exports = function(grunt) {
             'cp app/build/scripts/main.min.js build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js',
 
             'sed -i "" "s/{{ENVIRONMENT_TEAM_NICK}}/{{BUILD_TEAM_NICK}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/index.html',
+            'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/index.html',
 
             'sed -i "" "s/{{ENVIRONMENT_KIND_SLUG}}/chrome/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js',
             'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js'
@@ -157,6 +158,7 @@ module.exports = function(grunt) {
             'cp app/build/scripts/main.js build/sandbox/{{BUILD_TEAM_SLUG}}/scripts/main.js',
 
             'sed -i "" "s/{{ENVIRONMENT_TEAM_NICK}}/{{BUILD_TEAM_NICK}}/g" build/sandbox/{{BUILD_TEAM_SLUG}}/index.html',
+            'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/sandbox/{{BUILD_TEAM_SLUG}}/index.html',
 
             'sed -i "" "s/{{ENVIRONMENT_KIND_SLUG}}/sandbox/g" build/sandbox/{{BUILD_TEAM_SLUG}}/scripts/main.js',
             'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/sandbox/{{BUILD_TEAM_SLUG}}/scripts/main.js'
@@ -180,17 +182,7 @@ module.exports = function(grunt) {
     }
   });
 
-  [
-    'grunt-browserify',
-    'grunt-contrib-connect',
-    'grunt-contrib-jasmine',
-    'grunt-contrib-jasmine',
-    'grunt-contrib-jshint',
-    'grunt-contrib-uglify',
-    'grunt-contrib-watch',
-    'grunt-sass',
-    'grunt-shell'
-  ].forEach(grunt.loadNpmTasks);
+  require('load-grunt-tasks')(grunt);
 
   grunt.registerTask('test', ['browserify:specs', 'jasmine']);
   grunt.registerTask('default', ['build', 'connect', 'watch']);

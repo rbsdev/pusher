@@ -4,6 +4,7 @@
   },
 
   "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
+
   "description": "",
   "icons": {
     "16": "images/16x16.png",
@@ -15,7 +16,6 @@
   "name": "{{ENVIRONMENT_TEAM_NICK}} ZH",
   "permissions": [
     "http://*.clicrbs.com.br/",
-    "http://*.google-analytics.com/",
     "https://*.google-analytics.com/",
     "http://*.googleapis.com/",
     "http://*.gstatic.com/"
