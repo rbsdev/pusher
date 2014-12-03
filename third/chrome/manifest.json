@@ -14,6 +14,7 @@
   "permissions": [
     "http://*.clicrbs.com.br/",
     "http://*.google-analytics.com/",
+    "https://*.google-analytics.com/",
     "http://*.googleapis.com/",
     "http://*.gstatic.com/"
   ],
