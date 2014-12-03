@@ -12,8 +12,9 @@ body:after {
 
 h1 {
 	color: $gremio-color;
-	span {
-		background: url(../images/zh-gremista.svg) no-repeat;
+
+	.logo-triangle {
+		fill: $gremio-color;
 	}
 }
 
