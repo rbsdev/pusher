@@ -12,6 +12,10 @@ body:after {
 
 h1 {
 	color: $gremio-color;
+
+	.logo-triangle {
+		fill: $gremio-color;
+	}
 }
 
 #list-news {
