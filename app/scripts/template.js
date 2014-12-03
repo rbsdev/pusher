@@ -13,7 +13,8 @@ var Template = {
                     .replace(/\{\{ URL \}\}/g, element['link-desktop'] + "?origin-kind=" + Env.KIND_SLUG)
                     .replace('{{ TAG }}', element.tag)
                     .replace(/\{\{ TITLE \}\}/g, element.title)
-                    .replace(/\{\{ DATE \}\}/g, humanizedTime);
+                    .replace(/\{\{ DATE \}\}/g, humanizedTime)
+                    .replace(/\{\{ NEW \}\}/g, element.newBadge);
     });
 
     return output;
