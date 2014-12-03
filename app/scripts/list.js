@@ -45,8 +45,8 @@ var List = {
       });
     };
 
-    var onSuccess = function(datas) {
-      var html = Template.compile(this.html, datas);
+    var onSuccess = function(data) {
+      var html = Template.compile(this.html, data);
       this.element.innerHTML = html;
 
       updateLinks();
