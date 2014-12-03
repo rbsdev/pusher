@@ -27,7 +27,7 @@ var List = {
   newBadge: '<span>Nova</span>',
 
   augment: function(news) {
-    news.isNew = !(Math.random() + 0.5 >> 0);
+    news.isNew = false; // todo: check if news.id was already opened
     news.newBadge = news.isNew ? this.newBadge : '';
 
     return news;
@@ -69,6 +69,7 @@ var List = {
 
     if (hasNews === false) return;
 
+    data = data.map(this.augment.bind(this));
     this.currentData = data;
     var html = Template.compile(this.html, data);
     this.element.innerHTML = html;
