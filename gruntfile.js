@@ -182,17 +182,7 @@ module.exports = function(grunt) {
     }
   });
 
-  [
-    'grunt-browserify',
-    'grunt-contrib-connect',
-    'grunt-contrib-jasmine',
-    'grunt-contrib-jasmine',
-    'grunt-contrib-jshint',
-    'grunt-contrib-uglify',
-    'grunt-contrib-watch',
-    'grunt-sass',
-    'grunt-shell'
-  ].forEach(grunt.loadNpmTasks);
+  require('load-grunt-tasks')(grunt);
 
   grunt.registerTask('test', ['browserify:specs', 'jasmine']);
   grunt.registerTask('default', ['build', 'connect', 'watch']);
