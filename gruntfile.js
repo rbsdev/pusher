@@ -117,6 +117,7 @@ module.exports = function(grunt) {
             'cp app/build/scripts/main.min.js build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js',
 
             'sed -i "" "s/{{ENVIRONMENT_TEAM_NICK}}/{{BUILD_TEAM_NICK}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/index.html',
+            'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/index.html',
 
             'sed -i "" "s/{{ENVIRONMENT_KIND_SLUG}}/chrome/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js',
             'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js'
@@ -142,6 +143,7 @@ module.exports = function(grunt) {
             'cp app/build/scripts/main.js build/sandbox/{{BUILD_TEAM_SLUG}}/scripts/main.js',
 
             'sed -i "" "s/{{ENVIRONMENT_TEAM_NICK}}/{{BUILD_TEAM_NICK}}/g" build/sandbox/{{BUILD_TEAM_SLUG}}/index.html',
+            'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/sandbox/{{BUILD_TEAM_SLUG}}/index.html',
 
             'sed -i "" "s/{{ENVIRONMENT_KIND_SLUG}}/sandbox/g" build/sandbox/{{BUILD_TEAM_SLUG}}/scripts/main.js',
             'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/sandbox/{{BUILD_TEAM_SLUG}}/scripts/main.js'
