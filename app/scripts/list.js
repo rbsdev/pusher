@@ -33,11 +33,8 @@ var List = {
     return news;
   },
 
-  get: function() {
-    var url = this.url;
-
-    var updateLinks = function() {
-      var elements = document.getElementsByTagName('a');
+  updateLinks: function() {
+    var elements = document.getElementsByTagName('a');
       var lists = [].slice.call(elements);
 
       lists.forEach(function(element, index) {
@@ -53,7 +50,10 @@ var List = {
           Tracker.trigger(Env.TEAM_SLUG, element.href);
         }, false);
       });
-    };
+  },
+
+  get: function() {
+    var url = this.url;
 
     var onSuccess = function(data) {
       data = data.map(this.augment.bind(this));
@@ -61,12 +61,12 @@ var List = {
       var html = Template.compile(this.html, data);
       this.element.innerHTML = html;
 
-      updateLinks();
+      this.updateLinks();
     };
 
     Ajax.get({
-        url: url,
-        success: onSuccess.bind(this)
+      url: url,
+      success: onSuccess.bind(this)
     });
   }
 };
