@@ -42,19 +42,34 @@ var List = {
       });
   },
 
+  getNews: function() {
+    setInterval(function() {
+      Ajax.get({
+        url: url,
+        success: this.process.bind(this)
+      });
+    }, 600000); // 10 minutes
+  },
+
+  process: function(data) {
+    var hasNews = this.currentData && this.currentData[0].id !== data[0].id;
+
+    if ( !hasNews) return;
+
+    this.currentData = data;
+    var html = Template.compile(this.html, data);
+    this.element.innerHTML = html;
+
+    this.updateLinks();
+    this.getNews();
+  },
+
   get: function() {
     var url = this.url;
 
-    var onSuccess = function(data) {
-      var html = Template.compile(this.html, data);
-      this.element.innerHTML = html;
-
-      this.updateLinks();
-    };
-
     Ajax.get({
       url: url,
-      success: onSuccess.bind(this)
+      success: this.process.bind(this)
     });
   }
 };
