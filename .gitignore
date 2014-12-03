@@ -37,6 +37,5 @@ pids
 Temporary Items
 Thumbs.db
 
-!app/css/main.css
 app/vendor
 build
