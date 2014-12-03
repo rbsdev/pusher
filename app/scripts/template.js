@@ -10,10 +10,10 @@ var Template = {
       var humanizedTime = HumanizeDate.update(timestamp);
 
       output += html.replace('{{ SRC }}', element['original-thumb'])
-                    .replace(/\{\{ URL \}\}/gi, element['link-desktop'] + "?origin-kind=" + Env.KIND_SLUG)
+                    .replace(/\{\{ URL \}\}/g, element['link-desktop'] + "?origin-kind=" + Env.KIND_SLUG)
                     .replace('{{ TAG }}', element.tag)
-                    .replace(/\{\{ TITLE \}\}/gi, element.title)
-                    .replace(/\{\{ DATE \}\}/gi, humanizedTime);
+                    .replace(/\{\{ TITLE \}\}/g, element.title)
+                    .replace(/\{\{ DATE \}\}/g, humanizedTime);
     });
 
     return output;
