@@ -10,5 +10,25 @@
     "grunt-sass": "^0.16.1",
     "grunt-shell": "^1.1.1"
   },
-  "private": true
+  "private": true,
+  "name": "pusher",
+  "description": "Extension for Chrome and Firefox as well as desktop apps for Linux, Mac and Windows to receive the latest news about your beloved team.",
+  "version": "1.0.0",
+  "main": "gruntfile.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rbsdev/pusher.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rbsdev/pusher/issues"
+  },
+  "homepage": "https://github.com/rbsdev/pusher"
 }
