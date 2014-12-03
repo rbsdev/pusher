@@ -8,11 +8,13 @@ describe('template', function() {
     });
 
     it('should has timestamp method', function() {
-      expect(HumanizeDate.timestamp).toDefined();
+      var isFunction = typeof(HumanizeDate.timestamp) === 'function';
+      expect(isFunction).toBeTruthy();
     });
 
     it('should has update method', function() {
-      expect(HumanizeDate.update).toDefined();
+      var isFunction = typeof(HumanizeDate.update) === 'function';
+      expect(isFunction).toBeTruthy();
     });
   });
 });
