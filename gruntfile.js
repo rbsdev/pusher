@@ -2,12 +2,14 @@ module.exports = function(grunt) {
   'use strict';
 
   var teamify = function(commands) {
-    var parse = function(team, command, index, commands) {
-      return command.replace(/\{\{TEAM\}\}/g, team);
+    var parse = function(team_name, team_nick, team_slug, command, index, commands) {
+      return command.replace(/\{\{BUILD_TEAM_NAME\}\}/g, team_name)
+                    .replace(/\{\{BUILD_TEAM_NICK\}\}/g, team_nick)
+                    .replace(/\{\{BUILD_TEAM_SLUG\}\}/g, team_slug);
     };
 
-   return [ ].concat(commands.map(parse.bind(null, 'gremio')),
-                     commands.map(parse.bind(null, 'inter')))
+   return [ ].concat(commands.map(parse.bind(null, 'Grêmio', 'Gremista', 'gremio')),
+                     commands.map(parse.bind(null, 'Inter', 'Colorado', 'inter')))
              .join('; ');
   };
 
@@ -84,12 +86,12 @@ module.exports = function(grunt) {
       tree: {
         command: (function() {
           var commands = [
-            'mkdir -p build/chrome/{{TEAM}}',
-            'mkdir -p build/firefox/{{TEAM}}',
-            'mkdir -p build/linux/{{TEAM}}',
-            'mkdir -p build/os-x/{{TEAM}}',
-            'mkdir -p build/sandbox/{{TEAM}}',
-            'mkdir -p build/windows/{{TEAM}}'
+            'mkdir -p build/chrome/{{BUILD_TEAM_SLUG}}',
+            'mkdir -p build/firefox/{{BUILD_TEAM_SLUG}}',
+            'mkdir -p build/linux/{{BUILD_TEAM_SLUG}}',
+            'mkdir -p build/os-x/{{BUILD_TEAM_SLUG}}',
+            'mkdir -p build/sandbox/{{BUILD_TEAM_SLUG}}',
+            'mkdir -p build/windows/{{BUILD_TEAM_SLUG}}'
           ];
 
           return teamify(commands);
@@ -99,19 +101,21 @@ module.exports = function(grunt) {
       packChrome: {
         command: (function() {
           var commands = [
-            'cp third/chrome/manifest.json build/chrome/{{TEAM}}/manifest.json',
+            'cp third/chrome/manifest.json build/chrome/{{BUILD_TEAM_SLUG}}/manifest.json',
 
-            'mkdir -p build/chrome/{{TEAM}}/styles',
-            'cp app/build/styles/{{TEAM}}.css build/chrome/{{TEAM}}/styles/main.css',
+            'mkdir -p build/chrome/{{BUILD_TEAM_SLUG}}/styles',
+            'cp app/build/styles/{{BUILD_TEAM_SLUG}}.css build/chrome/{{BUILD_TEAM_SLUG}}/styles/main.css',
 
-            'cp -R app/images/ build/chrome/{{TEAM}}/images/',
-            'cp app/index.html build/chrome/{{TEAM}}/index.html',
+            'cp -R app/images/ build/chrome/{{BUILD_TEAM_SLUG}}/images/',
+            'cp app/index.html build/chrome/{{BUILD_TEAM_SLUG}}/index.html',
 
-            'mkdir -p build/chrome/{{TEAM}}/scripts',
-            'cp app/build/scripts/main.min.js build/chrome/{{TEAM}}/scripts/main.js',
+            'mkdir -p build/chrome/{{BUILD_TEAM_SLUG}}/scripts',
+            'cp app/build/scripts/main.min.js build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js',
 
-            'sed -i "" "s/{{ENVIRONMENT_KIND_SLUG}}/chrome/g" build/chrome/{{TEAM}}/scripts/main.js',
-            'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{TEAM}}/g" build/chrome/{{TEAM}}/scripts/main.js'
+            'sed -i "" "s/{{ENVIRONMENT_TEAM_NICK}}/{{BUILD_TEAM_NICK}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/index.html',
+
+            'sed -i "" "s/{{ENVIRONMENT_KIND_SLUG}}/chrome/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js',
+            'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js'
           ];
 
           return teamify(commands);
@@ -121,17 +125,19 @@ module.exports = function(grunt) {
       packSandbox: {
         command: (function() {
           var commands = [
-            'mkdir -p build/sandbox/{{TEAM}}/styles',
-            'cp app/build/styles/{{TEAM}}.css build/sandbox/{{TEAM}}/styles/main.css',
+            'mkdir -p build/sandbox/{{BUILD_TEAM_SLUG}}/styles',
+            'cp app/build/styles/{{BUILD_TEAM_SLUG}}.css build/sandbox/{{BUILD_TEAM_SLUG}}/styles/main.css',
 
-            'cp -R app/images/ build/sandbox/{{TEAM}}/images/',
-            'cp app/index.html build/sandbox/{{TEAM}}/index.html',
+            'cp -R app/images/ build/sandbox/{{BUILD_TEAM_SLUG}}/images/',
+            'cp app/index.html build/sandbox/{{BUILD_TEAM_SLUG}}/index.html',
 
-            'mkdir -p build/sandbox/{{TEAM}}/scripts',
-            'cp app/build/scripts/main.js build/sandbox/{{TEAM}}/scripts/main.js',
+            'mkdir -p build/sandbox/{{BUILD_TEAM_SLUG}}/scripts',
+            'cp app/build/scripts/main.js build/sandbox/{{BUILD_TEAM_SLUG}}/scripts/main.js',
 
-            'sed -i "" "s/{{ENVIRONMENT_KIND_SLUG}}/sandbox/g" build/sandbox/{{TEAM}}/scripts/main.js',
-            'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{TEAM}}/g" build/sandbox/{{TEAM}}/scripts/main.js'
+            'sed -i "" "s/{{ENVIRONMENT_TEAM_NAME}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/index.html',
+
+            'sed -i "" "s/{{ENVIRONMENT_KIND_SLUG}}/sandbox/g" build/sandbox/{{BUILD_TEAM_SLUG}}/scripts/main.js',
+            'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/sandbox/{{BUILD_TEAM_SLUG}}/scripts/main.js'
           ];
 
           return teamify(commands);
