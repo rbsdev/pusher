@@ -170,6 +170,11 @@ module.exports = function(grunt) {
     },
 
     watch: {
+      html: {
+        files: 'app/index.html',
+        tasks: ['build:pack']
+      },
+
       scripts: {
         files: 'app/scripts/*.js',
         tasks: ['build:test', 'build:scripts', 'build:pack']
