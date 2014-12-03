@@ -102,6 +102,7 @@ module.exports = function(grunt) {
         command: (function() {
           var commands = [
             'cp third/chrome/manifest.json build/chrome/{{BUILD_TEAM_SLUG}}/manifest.json',
+            'sed -i "" "s/{{ENVIRONMENT_TEAM_NICK}}/{{BUILD_TEAM_NICK}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/manifest.json',
 
             'mkdir -p build/chrome/{{BUILD_TEAM_SLUG}}/styles',
             'cp app/build/styles/{{BUILD_TEAM_SLUG}}.css build/chrome/{{BUILD_TEAM_SLUG}}/styles/main.css',
