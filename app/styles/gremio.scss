@@ -12,6 +12,9 @@ body:after {
 
 h1 {
 	color: $gremio-color;
+	span {
+		background: url(../images/gremio/zh-gremista.svg) no-repeat;
+	}
 }
 
 #list-news {
