@@ -6,6 +6,7 @@ var Tracker = require('./tracker.js');
 var List = {
   url: Env.service.NEWS,
   element: document.getElementById('list-news'),
+
   html: [
     '<li>',
       '<div class="photo">',
@@ -15,13 +16,22 @@ var List = {
       '</div>',
       '<div class="content">',
         '<a href="{{ URL }}">',
-            '<h3>{{ TAG }}</h3>',
+            '<h3>{{ NEW }}{{ TAG }}</h3>',
             '<h2>{{ TITLE }}</h2>',
             '<time datetime="{{ DATE }}">{{ DATE }}</time>',
         '</a>',
       '</div>',
     '</li>'
   ].join(''),
+
+  newBadge: '<span>Nova</span>',
+
+  augment: function(news) {
+    news.isNew = !(Math.random() + 0.5 >> 0);
+    news.newBadge = news.isNew ? this.newBadge : '';
+
+    return news;
+  },
 
   updateLinks: function() {
     var elements = document.getElementsByTagName('a');
