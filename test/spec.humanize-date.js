@@ -20,28 +20,28 @@ describe('template', function() {
   
   describe('update method', function() {
 	  
-	  it('should return exactly now timestamp value', function() {
+	    it('should return exactly now timestamp value', function() {
 	        expect(HumanizeDate.update(Date.now())).toEqual( "Agora"   ); 
 	    });
 	    
 	    it('should return exactly x minute ago value', function() {
-	       var scale = 24*60*60;
+	       var minuteTimestamp = 24*60*60;
 	       for (i=1; i < 3 ; i++) {
-	    	   expect(HumanizeDate.update(Date.now()-(scale)*i)).toEqual( "Há "+(i)+" minuto"+(i==1?"":"s")); 
+	    	   expect(HumanizeDate.update(Date.now()-(minuteTimestamp)*i)).toEqual( "Há "+(i)+" minuto"+(i==1?"":"s")); 
 	       }
 	    });
 	    
 	    it('should return exactly x hour ago value', function() {
-	    	var scale = 24*60*60*60;
+	    	var hourTimestamp = 24*60*60*60;
 	        for (i=1; i < 3 ; i++) {
-	        	expect(HumanizeDate.update(Date.now()-(scale)*i)).toEqual( "Há "+(i)+" hora"+(i==1?"":"s")); 
+	        	expect(HumanizeDate.update(Date.now()-(hourTimestamp)*i)).toEqual( "Há "+(i)+" hora"+(i==1?"":"s")); 
 	        }
 	    });
 	    
 	    it('should return exactly x day ago value', function() {
-	    	var scale = (24*60*60*60)*24;
+	    	var dayTimestamp = (24*60*60*60)*24;
 	        for (i=1; i < 3 ; i++) {
-	        	expect(HumanizeDate.update(Date.now()-(scale)*i)).toEqual( "Há "+(i)+" dia"+(i==1?"":"s")); 
+	        	expect(HumanizeDate.update(Date.now()-(dayTimestamp)*i)).toEqual( "Há "+(i)+" dia"+(i==1?"":"s")); 
 	        }
 	    });
   });
