@@ -25,7 +25,7 @@ module.exports = function(grunt) {
 
       specs: {
         files: {
-          'test/spec.build.js': ['test/spec.*.js']
+          'test/build/spec.build.js': ['test/spec.*.js']
         }
       }
     },
@@ -34,7 +34,7 @@ module.exports = function(grunt) {
       dev: {
         src: ['app/js/build.js'],
         options: {
-          specs: 'test/spec.build.js'
+          specs: 'test/build/spec.build.js'
         }
       }
     },
