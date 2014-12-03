@@ -23,11 +23,8 @@ var List = {
     '</li>'
   ].join(''),
 
-  get: function() {
-    var url = this.url;
-
-    var updateLinks = function() {
-      var elements = document.getElementsByTagName('a');
+  updateLinks: function() {
+    var elements = document.getElementsByTagName('a');
       var lists = [].slice.call(elements);
 
       lists.forEach(function(element, index) {
@@ -43,18 +40,21 @@ var List = {
           Tracker.trigger(Env.TEAM_SLUG, element.href);
         }, false);
       });
-    };
+  },
+
+  get: function() {
+    var url = this.url;
 
     var onSuccess = function(datas) {
       var html = Template.compile(this.html, datas);
       this.element.innerHTML = html;
 
-      updateLinks();
+      this.updateLinks();
     };
 
     Ajax.get({
-        url: url,
-        success: onSuccess.bind(this)
+      url: url,
+      success: onSuccess.bind(this)
     });
   }
 };

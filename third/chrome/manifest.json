@@ -2,6 +2,7 @@
   "browser_action": {
     "default_popup": "index.html"
   },
+
   "content_security_policy": "script-src 'self' 'unsafe-eval' https://ssl.google-analytics.com; object-src 'self'",
   "description": "",
   "icons": {
@@ -9,6 +10,7 @@
     "48": "images/48x48.png",
     "128": "images/128x128.png"
   },
+
   "manifest_version": 2,
   "name": "{{ENVIRONMENT_TEAM_NICK}} ZH",
   "permissions": [
@@ -17,6 +19,7 @@
     "https://*.google-analytics.com/",
     "http://*.googleapis.com/",
     "http://*.gstatic.com/"
+    // "notifications"
   ],
   "version": "0.0.1"
 }
