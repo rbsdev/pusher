@@ -16,5 +16,12 @@ describe('template', function() {
       var isFunction = typeof(HumanizeDate.update) === 'function';
       expect(isFunction).toBeTruthy();
     });
+    
+    
+    it('should return exactly now timestamp value', function() {
+        expect(HumanizeDate.update(Date.now())).toEqual( "Agora"   ); 
+     });
+    
+    
   });
 });
