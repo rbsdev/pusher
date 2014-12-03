@@ -39,3 +39,4 @@ Thumbs.db
 
 app/vendor
 build
+test/spec.build.js

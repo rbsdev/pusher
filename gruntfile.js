@@ -21,6 +21,21 @@ module.exports = function(grunt) {
         files: {
           'app/build/scripts/main.js': ['app/scripts/main.js']
         }
+      },
+
+      specs: {
+        files: {
+          'test/spec.build.js': ['test/spec.*.js']
+        }
+      }
+    },
+
+    jasmine: {
+      dev: {
+        src: ['app/js/build.js'],
+        options: {
+          specs: 'test/spec.build.js'
+        }
       }
     },
 
@@ -172,6 +187,7 @@ module.exports = function(grunt) {
     'grunt-shell'
   ].forEach(grunt.loadNpmTasks);
 
+  grunt.registerTask('test', ['browserify:specs', 'jasmine']);
   grunt.registerTask('default', ['build', 'connect', 'watch']);
 
   grunt.registerMultiTask('build', function() {

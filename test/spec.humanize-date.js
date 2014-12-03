@@ -1,4 +1,4 @@
-var HumanizeDate = require('../app/scripts/humenize-date.js');
+var HumanizeDate = require('../app/scripts/humanize-date.js');
 
 describe('template', function() {
   describe('instance', function() {
