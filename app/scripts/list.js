@@ -42,10 +42,11 @@ var List = {
         if (Env.isSandboxKind) {
           window.open(element.href);
         } else {
-          var totalNewsUread = this.totalNewsUnread--;
-          chrome.browserAction.setBadgeText({ text: totalNewsUread + ''  });
+          // var totalNewsUread = this.totalNewsUnread--;
+          localStorage.setItem('unread', (localStorage.getItem('unread') - 1) );
+          chrome.browserAction.setBadgeText({ text: localStorage.getItem('unread') + ''  });
           
-          // chrome.tabs.create( { url: element.href } );
+          chrome.tabs.create( { url: element.href } );
         }
 
         Tracker.trigger(Env.TEAM_SLUG, element.href);
@@ -75,8 +76,8 @@ var List = {
     data = data.map(this.augment.bind(this));
 
     this.currentData = data;
-    var totalNewsUread = this.totalNewsUnread = data.length;
-    chrome.browserAction.setBadgeText({ text: totalNewsUread + ''  });
+    localStorage.setItem('unread', data.length);
+    chrome.browserAction.setBadgeText({ text: localStorage.getItem('unread') + ''  });
 
     var html = Template.compile(this.html, data);
     this.element.innerHTML = html;
