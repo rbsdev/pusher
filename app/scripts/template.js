@@ -15,7 +15,7 @@ var Template = {
                     .replace(/\{\{ TITLE \}\}/g, element.title)
                     .replace(/\{\{ DATE \}\}/g, humanizedTime)
                     .replace('{{ ID }}', element.id)
-                    .replace(/\{\{ NEW \}\}/g, element.newBadge);
+                    .replace(/\{\{ NEW \}\}/g, element.newBadge || '');
     });
 
     return output;
