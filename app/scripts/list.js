@@ -10,7 +10,7 @@ var List = {
 
   html: [
     '<li>',
-      '<a href="{{ URL }}" title="{{ TITLE }}">',
+      '<a href="{{ URL }}" data-id="{{ }}" title="{{ TITLE }}">',
         '<div class="photo">',
           '<img src="{{ SRC }}?w=100&h=100&a=c" alt="">',
         '</div>',
@@ -43,14 +43,14 @@ var List = {
         if (Env.isSandboxKind) {
           window.open(element.href);
         } else {
-          if ( !DOM.hasClass(element, 'read')) {
+
+          
             localStorage.setItem('unread', (localStorage.getItem('unread') - 1) );
 
             chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
             chrome.browserAction.setBadgeText({ text: localStorage.getItem('unread') + ''  });
 
             DOM.addClass(element, 'read');
-          }
 
           chrome.tabs.create( { url: element.href } );
         }

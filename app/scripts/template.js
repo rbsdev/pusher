@@ -14,6 +14,7 @@ var Template = {
                     .replace('{{ TAG }}', element.tag)
                     .replace(/\{\{ TITLE \}\}/g, element.title)
                     .replace(/\{\{ DATE \}\}/g, humanizedTime)
+                    .replace('{{ ID }}', element.id)
                     .replace(/\{\{ NEW \}\}/g, element.newBadge);
     });
 
