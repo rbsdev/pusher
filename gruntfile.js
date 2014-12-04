@@ -72,6 +72,9 @@ module.exports = function(grunt) {
 
     uglify: {
       main: {
+        options: {
+          beautify: true
+        },
         files: {
           'app/build/scripts/main.min.js': 'app/build/scripts/main.js'
         }
