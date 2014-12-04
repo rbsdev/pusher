@@ -6,6 +6,7 @@ body:after {
 	content: " ";
 	width: 100%;
 	position: fixed;
+	z-index: 3;
 	bottom: 0;
 	border-bottom: 4px solid $gremio-color;
 }

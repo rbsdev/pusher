@@ -1,5 +1,13 @@
-#list-news {
-
+.list {
+	position: absolute;
+	width: auto;
+	height: auto;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	top: 150px;
+	overflow-y: auto;
+	
 	li {
 		display: block;
 		height: auto;
@@ -63,5 +71,20 @@
 				text-decoration: none;
 			}
 		}
+	}
+}
+
+#list-news-rival {
+	background-color: #f4f4f4;
+	@include transform(translateY(100%));
+	@include transition(transform .3s $ease-out-quart);
+
+	&.show {
+		@include transition(transform .3s $ease-out-quart);
+		@include transform(translateY(0%));
+	}
+
+	h3 {
+		color: #a4a4a4;
 	}
 }

@@ -4,8 +4,6 @@ var Template = require('./template.js');
 var Tracker = require('./tracker.js');
 
 var List = {
-  url: Env.service.NEWS,
-  element: document.getElementById('list-news'),
   html: [
     '<li>',
       '<div class="photo">',
@@ -23,11 +21,12 @@ var List = {
     '</li>'
   ].join(''),
 
-  get: function() {
-    var url = this.url;
+  get: function(url, elementList) {
+    var serviceUrl = url.replace('{{team}}', Env.TEAM_SLUG),
+        element = document.querySelector(elementList);
 
     var updateLinks = function() {
-      var elements = document.getElementsByTagName('a');
+      var elements = element.getElementsByTagName('a');
       var lists = [].slice.call(elements);
 
       lists.forEach(function(element, index) {
@@ -47,13 +46,13 @@ var List = {
 
     var onSuccess = function(datas) {
       var html = Template.compile(this.html, datas);
-      this.element.innerHTML = html;
+      element.innerHTML = html;
 
       updateLinks();
     };
 
     Ajax.get({
-        url: url,
+        url: serviceUrl,
         success: onSuccess.bind(this)
     });
   }

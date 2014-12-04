@@ -3,7 +3,7 @@ var Env = {
   TEAM_SLUG: '{{ENVIRONMENT_TEAM_SLUG}}',
 
   service: {
-    NEWS: 'http://zh.clicrbs.com.br/pusher-data-service/api/news/list/{{ENVIRONMENT_TEAM_SLUG}}?size=20&hl=1'
+    NEWS: 'http://zh.clicrbs.com.br/pusher-data-service/api/news/list/{{team}}?size=20&hl=1'
   }
 };
 

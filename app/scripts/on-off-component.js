@@ -1,12 +1,15 @@
+var List = require('./list.js');
+var Env = require('./env.js');
+
 var OnOffComponent = {
 	
 	component: document.querySelector('#component'),
 	box: component.querySelector('.component-box'),
+	list: document.querySelector('#list-news-rival'),
+	loaded: false,
 
 	init: function() {
 		this.bindEvents();
-		console.log('component', this.component);
-		console.log('component-box', this.box);
 	},
 
 	bindEvents: function() {
@@ -16,16 +19,53 @@ var OnOffComponent = {
 		var handlerPivot = function(event) {
 			var state = self.box.attributes['data-state'].value;
 
+			console.log(this);
 			if (state === "on") {
 				self.box.className = "component-box off";
 				self.box.attributes['data-state'].value = 'off';
+				self.hideRivalListNews();
 			} else {
 				self.box.className = "component-box on";
 				self.box.attributes['data-state'].value = 'on';
+
+				self.getNews(function() {
+					console.log('foi');
+					self.showRivalListNews();
+				});
+
 			}
 		};
 
 		pivot.addEventListener('click', handlerPivot);
+	},
+
+	getNews: function(callback){
+		var rivalTeam = '',
+			url = '';
+		
+		if (Env.TEAM_SLUG === "gremio" ) {
+			rivalTeam = "inter";
+		} else {
+			rivalTeam = "gremio";
+		}
+
+		url = Env.service.NEWS.replace("{{team}}", rivalTeam);
+
+		if (!this.loaded) {
+			List.get(url, "#list-news-rival");
+			this.loaded = true;
+		}
+
+		if (callback)
+			callback.call(this);
+	},
+
+	showRivalListNews: function() {
+		this.list.classList.add('show');
+	},
+
+	hideRivalListNews: function() {
+		this.list.classList.remove('show');
 	}
 };
 
