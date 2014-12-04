@@ -84,9 +84,11 @@ var List = {
     data = data.map(this.augment.bind(this));
 
     localStorage.setItem('currentData', JSON.stringify(data) );
-
     localStorage.setItem('unread', localStorage.getItem('unread') || data.length );
-    chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
+
+    if (Env.isChromeKind) {
+      chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
+    }
 
     var html = Template.compile(this.html, data);
     this.element.innerHTML = html;
