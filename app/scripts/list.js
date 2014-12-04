@@ -25,7 +25,7 @@ var List = {
   newBadge: '<span>Nova</span>',
 
   augment: function(news) {
-    news.isNew = false; // todo: check if news.id was already opened
+    news.isNew = true; // todo: check if news.id was already opened
     news.newBadge = news.isNew ? this.newBadge : '';
 
     return news;
@@ -89,14 +89,13 @@ var List = {
   process: function(data) {
     var lastNews = JSON.parse(localStorage.getItem('currentData'));
     var hasNews = lastNews && lastNews[0].id !== data[0].id;
-    var html;
+    data = data.map(this.augment.bind(this));
 
     if (hasNews === false)  {
       this.updateElements(lastNews);
       return;
     }
 
-    data = data.map(this.augment.bind(this));
     localStorage.setItem('unread', localStorage.getItem('unread') || data.length );
     
     if (lastNews) this.updateTotalUnread(lastNews);
