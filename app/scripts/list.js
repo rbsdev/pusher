@@ -72,12 +72,12 @@ var List = {
     var hasNews = lastNews && lastNews[0].id !== data[0].id;
     var html;
 
-    console.log('here?');
-
     if (hasNews === false)  {
-      alert('here?');
       html = Template.compile(this.html, lastNews);
       this.element.innerHTML = html;
+
+      this.updateLinks();
+      this.getNews();
 
       return;
     }
