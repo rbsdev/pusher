@@ -43,7 +43,6 @@ var List = {
         if (Env.isSandboxKind) {
           window.open(element.href);
         } else {
-          // var totalNewsUread = this.totalNewsUnread--;
           localStorage.setItem('unread', (localStorage.getItem('unread') - 1) );
           chrome.browserAction.setBadgeText({ text: localStorage.getItem('unread') + ''  });
           
@@ -70,13 +69,15 @@ var List = {
   },
 
   process: function(data) {
-    var hasNews = this.currentData && this.currentData[0].id !== data[0].id;
+    var lastNews = JSON.parse(localStorage.getItem('currentData'));
+    var hasNews = lastNews && lastNews[0].id !== data[0].id;
 
     if (hasNews === false) return;
 
     data = data.map(this.augment.bind(this));
 
-    this.currentData = data;
+    localStorage.setItem('currentData', JSON.stringify(data) );
+
     localStorage.setItem('unread', localStorage.getItem('unread') || data.length );
     chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
 
