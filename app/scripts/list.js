@@ -5,7 +5,7 @@ var Tracker = require('./tracker.js');
 var DOM = require('./dom.js');
 
 var List = {
-  url: Env.service.NEWS,
+  url: Env.service.NEWS.replace('{{team}}', Env.TEAM_SLUG),
   element: document.getElementById('list-news'),
 
   html: [
@@ -74,9 +74,9 @@ var List = {
     }, time);
   },
 
-  updateElements: function(data) {
-    html = Template.compile(this.html, data);
-    this.element.innerHTML = html;
+  updateElements: function(element, data) {
+    var html = Template.compile(this.html, data);
+    element.innerHTML = html;
 
     this.updateLinks();
     this.getNews();
@@ -99,7 +99,7 @@ var List = {
     data = data.map(this.augment.bind(this));
 
     if (hasNews === false)  {
-      this.updateElements(lastNews);
+      this.updateElements(this.element, lastNews);
       return;
     }
 
@@ -114,7 +114,7 @@ var List = {
       chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
     }
 
-    this.updateElements(data);
+    this.updateElements(this.element, data);
   },
 
   get: function() {
@@ -123,6 +123,18 @@ var List = {
     Ajax.get({
       url: url,
       success: this.process.bind(this)
+    });
+  },
+
+  getRival: function(url, element) {
+    var that = this;
+
+    Ajax.get({
+      url: url,
+      success: function(data) { 
+        that.updateElements.call(that, element, data);
+      }
+
     });
   }
 };
