@@ -67,49 +67,45 @@ var List = {
     }, time);
   },
 
+  updateElements: function(data) {
+    html = Template.compile(this.html, data);
+    this.element.innerHTML = html;
+
+    this.updateLinks();
+    this.getNews();
+  },
+
+  updateTotalUnread: function() {
+    var unreadTotal = parseInt(localStorage.getItem('unread'), 10);
+
+    data.forEach(function(newElement, index) {
+      if (newElement.id === lastNews[index]) return false;
+      unreadTotal++;
+    });
+
+    localStorage.setItem(unreadTotal);
+  },
+
   process: function(data) {
     var lastNews = JSON.parse(localStorage.getItem('currentData'));
     var hasNews = lastNews && lastNews[0].id !== data[0].id;
     var html;
 
     if (hasNews === false)  {
-      html = Template.compile(this.html, lastNews);
-      this.element.innerHTML = html;
-
-      this.updateLinks();
-      this.getNews();
-
+      this.updateElements(lastNews);
       return;
     }
 
     data = data.map(this.augment.bind(this));
-
-    
     localStorage.setItem('unread', localStorage.getItem('unread') || data.length );
-
     
-    if (lastNews) {
-      var unreadTotal = parseInt(localStorage.getItem('unread'), 10);
-
-      data.forEach(function(newElement, index) {
-        if (newElement.id === lastNews[index]) return false;
-        unreadTotal++;
-      });
-
-      localStorage.setItem(unreadTotal);
-    }
+    if (lastNews) this.updateTotalUnread(lastNews);
 
     localStorage.setItem('currentData', JSON.stringify(data) );
 
-    if (Env.isChromeKind) {
-      chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
-    }
+    if (Env.isChromeKind) chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
 
-    html = Template.compile(this.html, data);
-    this.element.innerHTML = html;
-
-    this.updateLinks();
-    this.getNews();
+    this.updateElements(data);
   },
 
   get: function() {
