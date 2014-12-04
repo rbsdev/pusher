@@ -11,7 +11,7 @@ var Storage = {
   },
 
   find: function(id) {
-    var list = JSON.parse(this.get);
+    var list = JSON.parse(this.get('unread-list'));
     hasValue = list.indexOf(id) >= 0;
 
     return hasValue;
