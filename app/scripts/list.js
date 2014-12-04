@@ -1,7 +1,8 @@
-  var Ajax = require('./ajax.js');
+var Ajax = require('./ajax.js');
 var Env = require('./env.js');
 var Template = require('./template.js');
 var Tracker = require('./tracker.js');
+var Storage = require('./storage.js');
 
 var List = {
   url: Env.service.NEWS,
@@ -42,7 +43,6 @@ var List = {
         if (Env.isSandboxKind) {
           window.open(element.href);
         } else {
-          // var totalNewsUread = this.totalNewsUnread--;
           localStorage.setItem('unread', (localStorage.getItem('unread') - 1) );
           chrome.browserAction.setBadgeText({ text: localStorage.getItem('unread') + ''  });
           
@@ -51,8 +51,8 @@ var List = {
 
         Tracker.trigger(Env.TEAM_SLUG, element.href);
 
-      }.bind(this), false);
-    }.bind(this));
+      }, false);
+    });
   },
 
   getNews: function() {
@@ -69,17 +69,18 @@ var List = {
   },
 
   process: function(data) {
-    var hasNews = this.currentData && this.currentData[0].id !== data[0].id;
+    var lastNews = JSON.parse(localStorage.getItem('currentData'));
+    var hasNews = lastNews && lastNews[0].id !== data[0].id;
 
     if (hasNews === false) return;
 
     data = data.map(this.augment.bind(this));
 
-    this.currentData = data;
-    localStorage.setItem('unread', data.length);
+    localStorage.setItem('currentData', JSON.stringify(data) );
+    localStorage.setItem('unread', localStorage.getItem('unread') || data.length );
 
     if (Env.isChromeKind) {
-      chrome.browserAction.setBadgeText({ text: localStorage.getItem('unread') + ''  });
+      chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
     }
 
     var html = Template.compile(this.html, data);
