@@ -18,14 +18,12 @@ Env.isSandboxKind = Env.KIND_SLUG == 'sandbox';
 Env.isWindowsKind = Env.KIND_SLUG == 'windows';
 
 if (Env.isGremioTeam) {
-  Env.service.NEWS_FROM_OPPONENT = Env.service.NEWS_FROM_OPPONENT.replace('{{ENVIRONMENT_OPPONENT_SLUG}}', 'inter');
   Env.TEAM_COLOR_ARRAY = [35, 145, 230, 255];
   Env.TEAM_COLOR_RGBA = 'rgba(35, 145, 230, 1)';
   Env.TEAM_NAME = 'Grêmio';
   Env.TEAM_NICK = 'Gremista';
   Env.TEAM_LINK = 'http://zh.clicrbs.com.br/rs/esportes/gremio';
 } else if (Env.isInterTeam) {
-  Env.service.NEWS_FROM_OPPONENT = Env.service.NEWS_FROM_OPPONENT.replace('{{ENVIRONMENT_OPPONENT_SLUG}}', 'gremio');
   Env.TEAM_COLOR_ARRAY = [35, 145, 230, 255];
   Env.TEAM_COLOR_RGBA = 'rgba(35, 145, 230, 1)';
   Env.TEAM_NAME = 'Inter';
