@@ -2,6 +2,7 @@ var Ajax = require('./ajax.js');
 var Env = require('./env.js');
 var Template = require('./template.js');
 var Tracker = require('./tracker.js');
+var Storage = require('./storage.js');
 
 var List = {
   url: Env.service.NEWS,
@@ -53,8 +54,8 @@ var List = {
 
         Tracker.trigger(Env.TEAM_SLUG, element.href);
 
-      }.bind(this), false);
-    }.bind(this));
+      }, false);
+    });
   },
 
   getNews: function() {
@@ -78,8 +79,8 @@ var List = {
     data = data.map(this.augment.bind(this));
 
     this.currentData = data;
-    localStorage.setItem('unread', data.length);
-    chrome.browserAction.setBadgeText({ text: localStorage.getItem('unread') + ''  });
+    localStorage.setItem('unread', localStorage.getItem('unread') || data.length );
+    chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
 
     var html = Template.compile(this.html, data);
     this.element.innerHTML = html;
