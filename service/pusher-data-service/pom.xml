@@ -4,6 +4,21 @@
   <artifactId>pusher-data-service</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
+  
+  
+<repositories>
+	<repository>
+		<id>Java.Net</id>
+		<url>http://download.java.net/maven/2/</url>
+	</repository>
+	<repository>
+		<id>hilux</id>
+		<name>Grupo RBS</name>
+		<url>http://hilux:8888/nexus/content/repositories/gruporbs/</url>
+	</repository>
+</repositories>
+  
+  
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
