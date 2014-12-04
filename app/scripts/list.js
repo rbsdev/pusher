@@ -51,7 +51,7 @@ var List = {
         } else {
           var elementId = element.getAttribute('data-id');
 
-          if ( !Storage.find.call(Storage, elementId)  ) {
+          if ( !Storage.find.call(Storage, elementId) ) {
             localStorage.setItem('unread', (localStorage.getItem('unread') - 1) );
 
             chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });

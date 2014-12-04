@@ -3,15 +3,18 @@ var Storage = {
   set: function(key, value) { localStorage.setItem(key, value); },
 
   save: function(id) {
-    var list = JSON.parse(this.get('unread-list'));
+    var list = JSON.parse(localStorage.getItem('unread-list'));
+
+    if ( !list) list = [];
+
     list.push(id);
-    this.set('unread-list', JSON.stringify(list) );
+    localStorage.setItem('unread-list', JSON.stringify(list) );
 
     return this;
   },
 
   find: function(id) {
-    var list = this.get('unread-list');
+    var list = localStorage.getItem('unread-list');
 
     if (!list) return false;
 
