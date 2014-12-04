@@ -3,6 +3,7 @@ var Env = require('./env.js');
 var Template = require('./template.js');
 var Tracker = require('./tracker.js');
 var DOM = require('./dom.js');
+var Storage = require('./storage.js');
 
 var List = {
   url: Env.service.NEWS.replace('{{team}}', Env.TEAM_SLUG),
@@ -10,7 +11,7 @@ var List = {
 
   html: [
     '<li>',
-      '<a href="{{ URL }}" data-id="{{ }}" title="{{ TITLE }}">',
+      '<a href="{{ URL }}" data-id="{{ ID }}" title="{{ TITLE }}">',
         '<div class="photo">',
           '<img src="{{ SRC }}?w=100&h=100&a=c" alt="">',
         '</div>',
@@ -43,14 +44,16 @@ var List = {
         if (Env.isSandboxKind) {
           window.open(element.href);
         } else {
+          var elementId = element.getAttribute('data-id');
 
-          
+          if ( !Storage.find(elementId)  ) {
             localStorage.setItem('unread', (localStorage.getItem('unread') - 1) );
 
             chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
             chrome.browserAction.setBadgeText({ text: localStorage.getItem('unread') + ''  });
 
-            DOM.addClass(element, 'read');
+            Storage.save(elementId);
+          }
 
           chrome.tabs.create( { url: element.href } );
         }
