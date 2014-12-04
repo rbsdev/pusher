@@ -9,18 +9,16 @@ var List = {
 
   html: [
     '<li>',
-      '<div class="photo">',
-        '<a href="{{ URL }}" title="{{ TITLE }}">',
-          '<img src="{{ SRC }}?w=100&h=100&a=c"',
-        '</a>',
-      '</div>',
-      '<div class="content">',
-        '<a href="{{ URL }}">',
-            '<h3>{{ NEW }}{{ TAG }}</h3>',
-            '<h2>{{ TITLE }}</h2>',
-            '<time datetime="{{ DATE }}">{{ DATE }}</time>',
-        '</a>',
-      '</div>',
+      '<a href="{{ URL }}" title="{{ TITLE }}">',
+        '<div class="photo">',
+          '<img src="{{ SRC }}?w=100&h=100&a=c" alt="">',
+        '</div>',
+        '<div class="content">',
+          '<h3>{{ NEW }}{{ TAG }}</h3>',
+          '<h2>{{ TITLE }}</h2>',
+          '<time datetime="{{ DATE }}">{{ DATE }}</time>',
+        '</div>',
+      '</a>',
     '</li>'
   ].join(''),
 
