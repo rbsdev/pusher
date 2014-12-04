@@ -38,14 +38,17 @@ var List = {
     lists.forEach(function(element, index) {
       element.addEventListener('click', function(e) {
         e.preventDefault();
+        
 
         if (Env.isSandboxKind) {
           window.open(element.href);
         } else {
-          localStorage.setItem('unread', (localStorage.getItem('unread') - 1) );
+          if () {
+            localStorage.setItem('unread', (localStorage.getItem('unread') - 1) );
 
-          chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
-          chrome.browserAction.setBadgeText({ text: localStorage.getItem('unread') + ''  });
+            chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
+            chrome.browserAction.setBadgeText({ text: localStorage.getItem('unread') + ''  });
+          }
 
           chrome.tabs.create( { url: element.href } );
         }
