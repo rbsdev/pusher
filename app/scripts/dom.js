@@ -4,7 +4,7 @@ var DOM = {
   },
 
   addClass: function(element, className) {
-    if (!this.hasClass(element, className)) {
+    if ( !this.hasClass(element, className)) {
       element.className += ' ' + className;
     }
 

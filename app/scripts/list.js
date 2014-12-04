@@ -2,6 +2,7 @@ var Ajax = require('./ajax.js');
 var Env = require('./env.js');
 var Template = require('./template.js');
 var Tracker = require('./tracker.js');
+var DOM = require('./dom.js');
 
 var List = {
   url: Env.service.NEWS.replace('{{team}}', Env.TEAM_SLUG),
@@ -38,12 +39,12 @@ var List = {
     lists.forEach(function(element, index) {
       element.addEventListener('click', function(e) {
         e.preventDefault();
-        
+        DOM.addClass(element, 'read');
 
         if (Env.isSandboxKind) {
           window.open(element.href);
         } else {
-          if () {
+          if ( !DOM.hasClass(element, 'read')) {
             localStorage.setItem('unread', (localStorage.getItem('unread') - 1) );
 
             chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
