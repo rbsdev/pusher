@@ -35,33 +35,38 @@ var List = {
 
   updateLinks: function() {
     var elements = document.getElementsByTagName('a');
-      var lists = [].slice.call(elements);
+    var lists = [].slice.call(elements);
 
-      lists.forEach(function(element, index) {
-        element.addEventListener('click', function(e) {
-          e.preventDefault();
+    lists.forEach(function(element, index) {
+      element.addEventListener('click', function(e) {
+        e.preventDefault();
 
-          if (Env.isSandboxKind) {
-            window.open(element.href);
-          } else {
-            chrome.tabs.create( { url: element.href } );
-          }
+        if (Env.isSandboxKind) {
+          window.open(element.href);
+        } else {
+          var totalNewsUread = this.totalNewsUnread--;
+          chrome.browserAction.setBadgeText({ text: totalNewsUread + ''  });
+          
+          // chrome.tabs.create( { url: element.href } );
+        }
 
-          Tracker.trigger(Env.TEAM_SLUG, element.href);
-        }, false);
-      });
+        Tracker.trigger(Env.TEAM_SLUG, element.href);
+
+      }.bind(this), false);
+    }.bind(this));
   },
 
   getNews: function() {
     var url = this.url;
     var process = this.process.bind(this);
+    var time = 600000; // 10 minutes
 
     setInterval(function() {
       Ajax.get({
         url: url,
         success: process
       });
-    }, 600000); // 10 minutes
+    }, time);
   },
 
   process: function(data) {
@@ -70,7 +75,11 @@ var List = {
     if (hasNews === false) return;
 
     data = data.map(this.augment.bind(this));
+
     this.currentData = data;
+    var totalNewsUread = this.totalNewsUnread = data.length;
+    chrome.browserAction.setBadgeText({ text: totalNewsUread + ''  });
+
     var html = Template.compile(this.html, data);
     this.element.innerHTML = html;
 

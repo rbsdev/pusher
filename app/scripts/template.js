@@ -8,7 +8,7 @@ var Template = {
     data.forEach(function(element, index) {
       var timestamp = HumanizeDate.timestamp(element.date);
       var humanizedTime = HumanizeDate.update(timestamp);
-      console.log(element);
+
       output += html.replace('{{ SRC }}', element['original-thumb'])
                     .replace(/\{\{ URL \}\}/g, element['link-desktop'] + "?origin-kind=" + Env.KIND_SLUG)
                     .replace('{{ TAG }}', element.tag)
