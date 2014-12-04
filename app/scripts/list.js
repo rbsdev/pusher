@@ -70,12 +70,13 @@ var List = {
   process: function(data) {
     var lastNews = JSON.parse(localStorage.getItem('currentData'));
     var hasNews = lastNews && lastNews[0].id !== data[0].id;
+    var html;
 
     console.log('here?');
 
     if (hasNews === false)  {
       alert('here?');
-      var html = Template.compile(this.html, lastNews);
+      html = Template.compile(this.html, lastNews);
       this.element.innerHTML = html;
 
       return;
@@ -90,7 +91,7 @@ var List = {
       chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
     }
 
-    var html = Template.compile(this.html, data);
+    html = Template.compile(this.html, data);
     this.element.innerHTML = html;
 
     this.updateLinks();
