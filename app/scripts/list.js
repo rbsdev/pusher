@@ -43,8 +43,10 @@ var List = {
           window.open(element.href);
         } else {
           localStorage.setItem('unread', (localStorage.getItem('unread') - 1) );
+
+          chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
           chrome.browserAction.setBadgeText({ text: localStorage.getItem('unread') + ''  });
-          
+
           chrome.tabs.create( { url: element.href } );
         }
 
@@ -102,7 +104,10 @@ var List = {
 
     localStorage.setItem('currentData', JSON.stringify(data) );
 
-    if (Env.isChromeKind) chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
+    if (Env.isChromeKind) {
+      chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
+      chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
+    }
 
     this.updateElements(data);
   },
