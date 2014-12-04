@@ -47,7 +47,7 @@
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
-			<version>6.0</version>
+			<version>6.0</version><testSourceDirectory>test</testSourceDirectory>
 			<scope>provided</scope>
 		</dependency>
 
@@ -126,6 +126,7 @@
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		<testSourceDirectory>test</testSourceDirectory>
 		<testResources>
 			<testResource>
 				<directory>${project.basedir}/test</directory>
