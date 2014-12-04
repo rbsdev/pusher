@@ -1,4 +1,4 @@
-var Ajax = require('./ajax.js');
+  var Ajax = require('./ajax.js');
 var Env = require('./env.js');
 var Template = require('./template.js');
 var Tracker = require('./tracker.js');
@@ -77,7 +77,10 @@ var List = {
 
     this.currentData = data;
     localStorage.setItem('unread', data.length);
-    chrome.browserAction.setBadgeText({ text: localStorage.getItem('unread') + ''  });
+
+    if (Env.isChromeKind) {
+      chrome.browserAction.setBadgeText({ text: localStorage.getItem('unread') + ''  });
+    }
 
     var html = Template.compile(this.html, data);
     this.element.innerHTML = html;
