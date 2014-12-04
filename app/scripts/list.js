@@ -39,7 +39,6 @@ var List = {
     lists.forEach(function(element, index) {
       element.addEventListener('click', function(e) {
         e.preventDefault();
-        DOM.addClass(element, 'read');
 
         if (Env.isSandboxKind) {
           window.open(element.href);
@@ -49,6 +48,8 @@ var List = {
 
             chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
             chrome.browserAction.setBadgeText({ text: localStorage.getItem('unread') + ''  });
+
+            DOM.addClass(element, 'read');
           }
 
           chrome.tabs.create( { url: element.href } );
