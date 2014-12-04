@@ -1,7 +1,4 @@
 var Storage = {
-  get: function(key) { localStorage.getItem(key); },
-  set: function(key, value) { localStorage.setItem(key, value); },
-
   save: function(id) {
     var list = JSON.parse(localStorage.getItem('unread-list'));
 
