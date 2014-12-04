@@ -13,11 +13,21 @@
 		height: auto;
 		overflow: hidden;
 		border-bottom: 1px solid #e7e7e7;
+
+		a {
+			display: block;
+			overflow: hidden;
+			@include transition(background-color 0.1s);
+
+			&:hover {
+				background-color: rgb(249, 249, 249);
+			}
+		}
 	}
 
 	.photo {
 		float: left;
-		width: 40%;
+		width: 38%;
 		padding: 15px;
 		a {
 			width: 100px;
@@ -32,9 +42,9 @@
 
 	.content {
 		float: right;
-		width: 60%;
+		width: 62%;
 		height: 130px;
-		padding-right: 10px;
+		padding-right: 16px;
 		padding-top: 15px;
 
 		h3 {
@@ -42,17 +52,39 @@
 			letter-spacing: -0.5px;
 			line-height: 20px;
 			margin-bottom: 4px;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
 			@include font("mont");
+
+			span {
+				position: relative;
+				top: -1px;
+				background-color: rgb(255, 221, 35);
+				border-radius: 2px;
+				color: rgb(34, 34, 34);
+				font-size: 10px;
+				margin-right: 5px;
+				padding-left: 5px;
+				padding-right: 5px;
+				text-transform: uppercase;
+			}
 		}
 
 		h2 {
 			font-size: 16px;
 			color: #1d1d25;
+			letter-spacing: -0.8px;
 			line-height: 18px;
 			max-height: 55px;
 			overflow: hidden;
 			margin-bottom: 10px;
 			@include font("mont");
+
+			// multiline text ellipsis
+			display: -webkit-box;
+			-webkit-line-clamp: 3;
+  		-webkit-box-orient: vertical;
 		}
 
 		time {

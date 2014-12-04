@@ -1,5 +1,14 @@
 {
+  "background": {
+    "persistent": false,
+    "page": "index.html"
+  },
   "browser_action": {
+    "default_icon": {                 
+      "16": "images/16x16.png",
+		  "48": "images/48x48.png",
+		  "128": "images/128x128.png"
+    },
     "default_popup": "index.html"
   },
   "description": "",
@@ -15,6 +24,7 @@
     "https://*.google-analytics.com/",
     "http://*.googleapis.com/",
     "http://*.gstatic.com/"
+    // "notifications"
   ],
-  "version": "0.0.1"
+  "version": "0.0.2"
 }

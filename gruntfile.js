@@ -1,17 +1,22 @@
+var os = require('os'),
+    platform = os.platform(),
+    teamify,
+    isDarwin = platform == 'darwin';
+
+teamify = function(commands) {
+  var parse = function(team_name, team_nick, team_slug, command, index, commands) {
+    return command.replace(/\{\{BUILD_TEAM_NAME\}\}/g, team_name)
+                  .replace(/\{\{BUILD_TEAM_NICK\}\}/g, team_nick)
+                  .replace(/\{\{BUILD_TEAM_SLUG\}\}/g, team_slug);
+  };
+
+ return [ ].concat(commands.map(parse.bind(null, 'Grêmio', 'Gremista', 'gremio')),
+                   commands.map(parse.bind(null, 'Inter', 'Colorado', 'inter')))
+           .join('; ');
+};
+
 module.exports = function(grunt) {
   'use strict';
-
-  var teamify = function(commands) {
-    var parse = function(team_name, team_nick, team_slug, command, index, commands) {
-      return command.replace(/\{\{BUILD_TEAM_NAME\}\}/g, team_name)
-                    .replace(/\{\{BUILD_TEAM_NICK\}\}/g, team_nick)
-                    .replace(/\{\{BUILD_TEAM_SLUG\}\}/g, team_slug);
-    };
-
-   return [ ].concat(commands.map(parse.bind(null, 'Grêmio', 'Gremista', 'gremio')),
-                     commands.map(parse.bind(null, 'Inter', 'Colorado', 'inter')))
-             .join('; ');
-  };
 
   grunt.initConfig({
     pkg: require('./package'),
@@ -67,6 +72,9 @@ module.exports = function(grunt) {
 
     uglify: {
       main: {
+        options: {
+          beautify: true
+        },
         files: {
           'app/build/scripts/main.min.js': 'app/build/scripts/main.js'
         }
@@ -117,7 +125,7 @@ module.exports = function(grunt) {
         command: (function() {
           var commands = [
             'cp third/chrome/manifest.json build/chrome/{{BUILD_TEAM_SLUG}}/manifest.json',
-            'sed -i "" "s/{{ENVIRONMENT_TEAM_NICK}}/{{BUILD_TEAM_NICK}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/manifest.json',
+            'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_TEAM_NICK}}/{{BUILD_TEAM_NICK}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/manifest.json',
 
             'mkdir -p build/chrome/{{BUILD_TEAM_SLUG}}/styles',
             'cp app/build/styles/{{BUILD_TEAM_SLUG}}.css build/chrome/{{BUILD_TEAM_SLUG}}/styles/main.css',
@@ -131,11 +139,11 @@ module.exports = function(grunt) {
             'mkdir -p build/chrome/{{BUILD_TEAM_SLUG}}/scripts',
             'cp app/build/scripts/main.min.js build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js',
 
-            'sed -i "" "s/{{ENVIRONMENT_TEAM_NICK}}/{{BUILD_TEAM_NICK}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/index.html',
-            'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/index.html',
+            'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_TEAM_NICK}}/{{BUILD_TEAM_NICK}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/index.html',
+            'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/index.html',
 
-            'sed -i "" "s/{{ENVIRONMENT_KIND_SLUG}}/chrome/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js',
-            'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js'
+            'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_KIND_SLUG}}/chrome/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js',
+            'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js'
           ];
 
           return teamify(commands);
@@ -157,11 +165,11 @@ module.exports = function(grunt) {
             'mkdir -p build/sandbox/{{BUILD_TEAM_SLUG}}/scripts',
             'cp app/build/scripts/main.js build/sandbox/{{BUILD_TEAM_SLUG}}/scripts/main.js',
 
-            'sed -i "" "s/{{ENVIRONMENT_TEAM_NICK}}/{{BUILD_TEAM_NICK}}/g" build/sandbox/{{BUILD_TEAM_SLUG}}/index.html',
-            'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/sandbox/{{BUILD_TEAM_SLUG}}/index.html',
+            'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_TEAM_NICK}}/{{BUILD_TEAM_NICK}}/g" build/sandbox/{{BUILD_TEAM_SLUG}}/index.html',
+            'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/sandbox/{{BUILD_TEAM_SLUG}}/index.html',
 
-            'sed -i "" "s/{{ENVIRONMENT_KIND_SLUG}}/sandbox/g" build/sandbox/{{BUILD_TEAM_SLUG}}/scripts/main.js',
-            'sed -i "" "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/sandbox/{{BUILD_TEAM_SLUG}}/scripts/main.js'
+            'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_KIND_SLUG}}/sandbox/g" build/sandbox/{{BUILD_TEAM_SLUG}}/scripts/main.js',
+            'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/sandbox/{{BUILD_TEAM_SLUG}}/scripts/main.js'
           ];
 
           return teamify(commands);

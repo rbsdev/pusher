@@ -19,7 +19,6 @@ var OnOffComponent = {
 		var handlerPivot = function(event) {
 			var state = self.box.attributes['data-state'].value;
 
-			console.log(this);
 			if (state === "on") {
 				self.box.className = "component-box off";
 				self.box.attributes['data-state'].value = 'off';
@@ -29,7 +28,6 @@ var OnOffComponent = {
 				self.box.attributes['data-state'].value = 'on';
 
 				self.getNews(function() {
-					console.log('foi');
 					self.showRivalListNews();
 				});
 
@@ -52,7 +50,7 @@ var OnOffComponent = {
 		url = Env.service.NEWS.replace("{{team}}", rivalTeam);
 
 		if (!this.loaded) {
-			List.get(url, "#list-news-rival");
+			List.getRival(url, this.list);
 			this.loaded = true;
 		}
 

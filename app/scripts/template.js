@@ -3,6 +3,7 @@ var Env = require('./env.js');
 
 var Template = {
   compile: function(html, data) {
+    console.log(data);
     var output = '';
 
     data.forEach(function(element, index) {
@@ -13,7 +14,8 @@ var Template = {
                     .replace(/\{\{ URL \}\}/g, element['link-desktop'] + "?origin-kind=" + Env.KIND_SLUG)
                     .replace('{{ TAG }}', element.tag)
                     .replace(/\{\{ TITLE \}\}/g, element.title)
-                    .replace(/\{\{ DATE \}\}/g, humanizedTime);
+                    .replace(/\{\{ DATE \}\}/g, humanizedTime)
+                    .replace(/\{\{ NEW \}\}/g, element.newBadge || '');
     });
 
     return output;
