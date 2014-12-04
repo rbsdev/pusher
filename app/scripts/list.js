@@ -84,8 +84,22 @@ var List = {
 
     data = data.map(this.augment.bind(this));
 
-    localStorage.setItem('currentData', JSON.stringify(data) );
+    
     localStorage.setItem('unread', localStorage.getItem('unread') || data.length );
+
+    
+    if (lastNews) {
+      var unreadTotal = parseInt(localStorage.getItem('unread'), 10);
+
+      data.forEach(function(newElement, index) {
+        if (newElement.id === lastNews[index]) return false;
+        unreadTotal++;
+      });
+
+      localStorage.setItem(unreadTotal);
+    }
+
+    localStorage.setItem('currentData', JSON.stringify(data) );
 
     if (Env.isChromeKind) {
       chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
