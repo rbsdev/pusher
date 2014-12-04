@@ -36,7 +36,7 @@ node_modules
 pids
 Temporary Items
 Thumbs.db
-
 app/vendor
 build
 test/build/
+*/target/*
