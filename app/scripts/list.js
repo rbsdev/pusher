@@ -2,7 +2,6 @@ var Ajax = require('./ajax.js');
 var Env = require('./env.js');
 var Template = require('./template.js');
 var Tracker = require('./tracker.js');
-var Storage = require('./storage.js');
 
 var List = {
   url: Env.service.NEWS,
@@ -72,7 +71,15 @@ var List = {
     var lastNews = JSON.parse(localStorage.getItem('currentData'));
     var hasNews = lastNews && lastNews[0].id !== data[0].id;
 
-    if (hasNews === false) return;
+    console.log('here?');
+
+    if (hasNews === false)  {
+      alert('here?');
+      var html = Template.compile(this.html, lastNews);
+      this.element.innerHTML = html;
+
+      return;
+    }
 
     data = data.map(this.augment.bind(this));
 
