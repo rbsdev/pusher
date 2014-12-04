@@ -42,17 +42,22 @@ var List = {
         e.preventDefault();
 
         if (Env.isSandboxKind) {
+          if ( !Storage.find.call(Storage, elementId)  ) {
+            localStorage.setItem('unread', (localStorage.getItem('unread') - 1) );
+            Storage.save.call(Storage, elementId);
+          }
+
           window.open(element.href);
         } else {
           var elementId = element.getAttribute('data-id');
 
-          if ( !Storage.find(elementId)  ) {
+          if ( !Storage.find.call(Storage, elementId)  ) {
             localStorage.setItem('unread', (localStorage.getItem('unread') - 1) );
 
             chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
             chrome.browserAction.setBadgeText({ text: localStorage.getItem('unread') + ''  });
 
-            Storage.save(elementId);
+            Storage.save.call(Storage, elementId);
           }
 
           chrome.tabs.create( { url: element.href } );

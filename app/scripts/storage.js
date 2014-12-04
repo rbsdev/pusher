@@ -1,6 +1,6 @@
 var Storage = {
-  get: localStorage.getItem,
-  set: localStorage.setItem,
+  get: function(key) { localStorage.getItem(key); },
+  set: function(key, value) { localStorage.setItem(key, value); },
 
   save: function(id) {
     var list = JSON.parse(this.get('unread-list'));
@@ -11,9 +11,11 @@ var Storage = {
   },
 
   find: function(id) {
-    var list = JSON.parse(this.get('unread-list'));
-    hasValue = list.indexOf(id) >= 0;
+    var list = this.get('unread-list');
 
+    if (!list) return false;
+
+    hasValue = JSON.parse(list).indexOf(id) >= 0;
     return hasValue;
   }
 };
