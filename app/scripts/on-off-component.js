@@ -40,16 +40,13 @@ var OnOffComponent = {
   },
 
   getNews: function(callback){
-    var rivalTeam = '',
-        url = '';
-    
-    if (Env.TEAM_SLUG === "gremio" ) {
-      rivalTeam = "inter";
-    } else {
-      rivalTeam = "gremio";
-    }
+    var rivalTeams = {
+      'gremio': 'inter',
+      'inter': 'gremio'
+    };
 
-    url = Env.service.NEWS.replace("{{team}}", rivalTeam);
+    var rivalTeam = rivalTeams[Env.TEAM_SLUG];
+    var url = Env.service.NEWS.replace("{{team}}", rivalTeam);
 
     if (!this.loaded) {
       List.getRival(url, this.list);
