@@ -14,7 +14,7 @@
   "private": true,
   "name": "pusher",
   "description": "Extension for Chrome and Firefox as well as desktop apps for Linux, Mac and Windows to receive the latest news about your beloved team.",
-  "version": "1.0.0",
+  "version": "0.0.3",
   "main": "gruntfile.js",
   "directories": {
     "test": "test"
