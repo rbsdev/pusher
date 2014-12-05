@@ -63,7 +63,7 @@ var List = {
           chrome.tabs.create( { url: element.href } );
         }
 
-        Tracker.trigger(Env.TEAM_SLUG, element.href);
+        Tracker.trigger(Env.TEAM_SLUG_CAPITALIZED, element.href);
 
       }, false);
     });
