@@ -15,21 +15,20 @@ var OnOffComponent = {
 
 	bindEvents: function() {
 		var pivot = component.querySelector('.component-pivot');
-		var self = this;
 
 		var handlerPivot = function(event) {
-			var state = self.box.attributes['data-state'].value;
+			var state = this.box.attributes['data-state'].value;
 
 			if (state === "on") {
-				self.box.className = "component-box off";
-				self.box.attributes['data-state'].value = 'off';
-				self.hideRivalListNews();
+				this.box.className = "component-box off";
+				this.box.attributes['data-state'].value = 'off';
+				this.hideRivalListNews();
 			} else {
-				self.box.className = "component-box on";
-				self.box.attributes['data-state'].value = 'on';
+				this.box.className = "component-box on";
+				this.box.attributes['data-state'].value = 'on';
 
-				self.getNews(function() {
-					self.showRivalListNews();
+				this.getNews(function() {
+					this.showRivalListNews();
 				});
 
 			}
@@ -37,7 +36,7 @@ var OnOffComponent = {
 			Tracker.trigger(Env.TEAM_SLUG_CAPITALIZED, 'Noticias do rival alternado');
 		};
 
-		pivot.addEventListener('click', handlerPivot);
+		pivot.addEventListener('click', handlerPivot.bind(this));
 	},
 
 	getNews: function(callback){
