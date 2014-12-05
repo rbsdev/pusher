@@ -7,6 +7,8 @@ var Env = {
   }
 };
 
+Env.TEAM_SLUG_CAPITALIZED = Env.TEAM_SLUG.charAt(0).toUpperCase() + Env.TEAM_SLUG.substring(1);
+
 Env.isGremioTeam = Env.TEAM_SLUG == 'gremio';
 Env.isInterTeam = Env.TEAM_SLUG == 'inter';
 
