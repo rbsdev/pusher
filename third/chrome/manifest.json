@@ -25,7 +25,6 @@
     "https://*.google-analytics.com/",
     "http://*.googleapis.com/",
     "http://*.gstatic.com/"
-    // "notifications"
   ],
   "version": "0.0.2"
 }
