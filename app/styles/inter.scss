@@ -2,13 +2,13 @@
 
 $inter-color: #dd1a31;
 
-body:after {
+body::after {
 	content: " ";
 	width: 100%;
 	position: fixed;
 	z-index: 3;
 	bottom: 0;
-	border-bottom: 4px solid $inter-color;
+	border-bottom: 2px solid $inter-color;
 }
 
 h1 {
