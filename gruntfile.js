@@ -1,4 +1,5 @@
 var os = require('os'),
+    pkg = require('./package'),
     platform = os.platform(),
     teamify,
     isDarwin = platform == 'darwin';
@@ -19,7 +20,7 @@ module.exports = function(grunt) {
   'use strict';
 
   grunt.initConfig({
-    pkg: require('./package'),
+    pkg: pkg,
 
     browserify: {
       main: {
@@ -143,7 +144,13 @@ module.exports = function(grunt) {
             'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/index.html',
 
             'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_KIND_SLUG}}/chrome/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js',
-            'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js'
+            'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js',
+
+            'cd build/chrome/{{BUILD_TEAM_SLUG}}',
+            'LAST_TAG=$(git tag | tail -n 1)',
+            'zip -r "{{BUILD_TEAM_SLUG}}-${LAST_TAG}.zip" *',
+            'mv "{{BUILD_TEAM_SLUG}}-${LAST_TAG}.zip" ..',
+            'cd ../../..'
           ];
 
           return teamify(commands);
