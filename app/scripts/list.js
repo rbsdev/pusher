@@ -11,7 +11,7 @@ var List = {
 
   html: [
     '<li>',
-      '<a href="{{ URL }}" data-id="{{ ID }}" title="{{ TITLE }}">',
+      '<a href="{{ URL }}" data-id="{{ ID }}" title="{{ TITLE_SAFE }}">',
         '<div class="photo">',
           '<img src="{{ SRC }}?w=100&h=100&a=c" alt="">',
         '</div>',
