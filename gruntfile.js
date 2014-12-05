@@ -8,7 +8,8 @@ teamify = function(commands) {
   var parse = function(team_name, team_nick, team_slug, command, index, commands) {
     return command.replace(/\{\{BUILD_TEAM_NAME\}\}/g, team_name)
                   .replace(/\{\{BUILD_TEAM_NICK\}\}/g, team_nick)
-                  .replace(/\{\{BUILD_TEAM_SLUG\}\}/g, team_slug);
+                  .replace(/\{\{BUILD_TEAM_SLUG\}\}/g, team_slug)
+                  .replace(/\{\{BUILD_VERSION\}\}/g, pkg.version);
   };
 
  return [ ].concat(commands.map(parse.bind(null, 'Grêmio', 'Gremista', 'gremio')),
@@ -127,6 +128,7 @@ module.exports = function(grunt) {
           var commands = [
             'cp third/chrome/manifest.json build/chrome/{{BUILD_TEAM_SLUG}}/manifest.json',
             'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_TEAM_NICK}}/{{BUILD_TEAM_NICK}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/manifest.json',
+            'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_VERSION}}/{{BUILD_VERSION}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/manifest.json',
 
             'mkdir -p build/chrome/{{BUILD_TEAM_SLUG}}/styles',
             'cp app/build/styles/{{BUILD_TEAM_SLUG}}.css build/chrome/{{BUILD_TEAM_SLUG}}/styles/main.css',
@@ -147,9 +149,8 @@ module.exports = function(grunt) {
             'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js',
 
             'cd build/chrome/{{BUILD_TEAM_SLUG}}',
-            'LAST_TAG=$(git tag | tail -n 1)',
-            'zip -r "{{BUILD_TEAM_SLUG}}-${LAST_TAG}.zip" *',
-            'mv "{{BUILD_TEAM_SLUG}}-${LAST_TAG}.zip" ..',
+            'zip -r "{{BUILD_TEAM_SLUG}}-{{BUILD_VERSION}}.zip" *',
+            'mv "{{BUILD_TEAM_SLUG}}-{{BUILD_VERSION}}.zip" ..',
             'cd ../../..'
           ];
 
