@@ -39,7 +39,7 @@ var OnOffComponent = {
 
 	getNews: function(callback){
 		var rivalTeam = '',
-			url = '';
+				url = '';
 		
 		if (Env.TEAM_SLUG === "gremio" ) {
 			rivalTeam = "inter";
