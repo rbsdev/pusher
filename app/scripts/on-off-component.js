@@ -1,5 +1,6 @@
 var List = require('./list.js');
 var Env = require('./env.js');
+var Tracker = require('./tracker.js');
 
 var OnOffComponent = {
 	
@@ -32,6 +33,8 @@ var OnOffComponent = {
 				});
 
 			}
+
+			Tracker.trigger(Env.TEAM_SLUG_CAPITALIZED, 'Noticias do rival alternado');
 		};
 
 		pivot.addEventListener('click', handlerPivot);
