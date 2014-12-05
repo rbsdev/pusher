@@ -131,7 +131,7 @@ module.exports = function(grunt) {
             'cp app/build/styles/{{BUILD_TEAM_SLUG}}.css build/chrome/{{BUILD_TEAM_SLUG}}/styles/main.css',
 
             'mkdir -p build/chrome/{{BUILD_TEAM_SLUG}}/images',
-            'cp -R app/images/zh.svg build/chrome/{{BUILD_TEAM_SLUG}}/images/',
+            'cp app/images/* build/chrome/{{BUILD_TEAM_SLUG}}/images/',
             'cp -R app/images/{{BUILD_TEAM_SLUG}}/ build/chrome/{{BUILD_TEAM_SLUG}}/images/',
 
             'cp app/index.html build/chrome/{{BUILD_TEAM_SLUG}}/index.html',
@@ -157,7 +157,7 @@ module.exports = function(grunt) {
             'cp app/build/styles/{{BUILD_TEAM_SLUG}}.css build/sandbox/{{BUILD_TEAM_SLUG}}/styles/main.css',
 
             'mkdir -p build/sandbox/{{BUILD_TEAM_SLUG}}/images',
-            'cp -R app/images/zh.svg build/sandbox/{{BUILD_TEAM_SLUG}}/images/',
+            'cp app/images/* build/sandbox/{{BUILD_TEAM_SLUG}}/images/',
             'cp -R app/images/{{BUILD_TEAM_SLUG}}/ build/sandbox/{{BUILD_TEAM_SLUG}}/images/',
 
             'cp app/index.html build/sandbox/{{BUILD_TEAM_SLUG}}/index.html',

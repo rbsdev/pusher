@@ -13,7 +13,7 @@ var Template = {
       var timestamp = HumanizeDate.timestamp(element.date);
       var humanizedTime = HumanizeDate.update(timestamp);
 
-      output += html.replace('{{ SRC }}', element['original-thumb'])
+      output += html.replace('{{ SRC }}', element['original-thumb'] || 'images/empty.png')
                     .replace(/\{\{ URL \}\}/g, element['link-desktop'] + "?origin-kind=" + Env.KIND_SLUG)
                     .replace('{{ TAG }}', element.tag)
                     .replace(/\{\{ TITLE \}\}/g, element.title)
