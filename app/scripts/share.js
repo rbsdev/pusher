@@ -9,7 +9,7 @@ var Share = function(url) {
       var onClick = function(e) {
         e.preventDefault();
 
-                
+        
       };
 
       list.forEach(function(element, index) {

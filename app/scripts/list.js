@@ -19,6 +19,8 @@ var List = {
           '<h3>{{ NEW }}{{ TAG }}</h3>',
           '<h2>{{ TITLE }}</h2>',
           '<time datetime="{{ DATE }}">{{ DATE }}</time>',
+          '<ul>',
+          '</ul>',
         '</div>',
       '</a>',
     '</li>'
