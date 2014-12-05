@@ -41,18 +41,22 @@ var List = {
       element.addEventListener('click', function(e) {
         e.preventDefault();
 
-        if (Env.isSandboxKind) {
-          if ( !Storage.find.call(Storage, elementId)  ) {
-            localStorage.setItem('unread', (localStorage.getItem('unread') - 1) );
-            Storage.save.call(Storage, elementId);
+        if (Env.isChromeKind) {
+          var elementId = element.getAttribute('data-id');
+          var isFromOpponent;
+
+          try {
+            // holy shit this has to be optimized
+            isFromOpponent = element.parentElement.parentElement.getAttribute('id') == 'list-news-rival';
+          } catch (error) {
+            isFromOpponent = false;
+            console.log(error);
           }
 
-          window.open(element.href);
-        } else {
-          var elementId = element.getAttribute('data-id');
-
           if ( !Storage.find.call(Storage, elementId) ) {
-            localStorage.setItem('unread', (localStorage.getItem('unread') - 1) );
+            if (!isFromOpponent) {
+              localStorage.setItem('unread', (localStorage.getItem('unread') - 1) );
+            }
 
             chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
             chrome.browserAction.setBadgeText({ text: localStorage.getItem('unread') + ''  });
