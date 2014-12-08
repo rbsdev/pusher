@@ -85,7 +85,13 @@ var List = {
         url: url,
         success: process
       });
+
+      chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
+      chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') || '20' } );
     }, 10000);
+
+    chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
+    chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') || '20' } );
   },
 
   updateElements: function(element, data) {
@@ -106,6 +112,9 @@ var List = {
     });
 
     localStorage.setItem('unread', unreadTotal);
+
+    chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
+    chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
   },
 
   process: function(data) {
@@ -123,10 +132,10 @@ var List = {
 
     localStorage.setItem('currentData', JSON.stringify(data) );
 
-    if (Env.isChromeKind) {
-      chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
-      chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
-    }
+    // if (Env.isChromeKind) {
+      // chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
+      // chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
+    // }
 
     this.updateElements(this.element, data);
   },
