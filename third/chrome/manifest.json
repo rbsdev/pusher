@@ -1,7 +1,7 @@
 {
   "background": {
     "persistent": false,
-    "page": "index.html"
+    "scripts": ["scripts/main-background.js"]
   },
   "browser_action": {
     "default_icon": {                 
@@ -20,11 +20,5 @@
   },
   "manifest_version": 2,
   "name": "{{ENVIRONMENT_TEAM_NICK}} ZH",
-  "permissions": [
-    "http://*.clicrbs.com.br/",
-    "https://*.google-analytics.com/",
-    "http://*.googleapis.com/",
-    "http://*.gstatic.com/"
-  ],
   "version": "{{ENVIRONMENT_VERSION}}"
 }
