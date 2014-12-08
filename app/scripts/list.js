@@ -95,7 +95,7 @@ var List = {
   updateElements: function(element, data) {
     var obj = data.map(this.augment.bind(this));
     var html = Template.compile(this.html, obj);
-    element.innerHTML = html;
+    if (element) element.innerHTML = html;
 
     this.updateLinks();
     this.getNews();
