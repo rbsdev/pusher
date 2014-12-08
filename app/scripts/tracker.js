@@ -7,6 +7,7 @@ var Tracker = {
     window._gaq.push(['_setAccount', 'UA-3469445-1']);
     window._gaq.push(['_setAllowHash', false]);
     window._gaq.push(['_setAllowLinker', true]);
+    window._gaq.push(['_trackPageview']);
 
     sdk.type = 'text/javascript';
     sdk.async = true;
