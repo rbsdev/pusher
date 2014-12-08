@@ -11,7 +11,11 @@ var mimeTypes = {
 var onHead = function(response, content, statusCode, extension){
    var mimeType = mimeTypes[extension];
 
-   response.writeHead(statusCode, { 'Content-Type': mimeType });
+   response.writeHead(statusCode, {
+      'Content-Type': mimeType,
+      'Access-Control-Allow-Origin': '*'
+   });
+
    response.end(content, 'utf-8');
 };
 
