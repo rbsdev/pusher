@@ -26,7 +26,8 @@ module.exports = function(grunt) {
     browserify: {
       main: {
         files: {
-          'app/build/scripts/main.js': ['app/scripts/main.js']
+          'app/build/scripts/main.js': ['app/scripts/main.js'],
+          'app/build/scripts/main-background.js': ['app/scripts/main-background.js']
         }
       },
 
@@ -74,11 +75,13 @@ module.exports = function(grunt) {
 
     uglify: {
       main: {
-        options: {
-          beautify: true
-        },
+        // options: {
+        //   beautify: true,
+        //   // mangle: false
+        // },
         files: {
-          'app/build/scripts/main.min.js': 'app/build/scripts/main.js'
+          'app/build/scripts/main.min.js': 'app/build/scripts/main.js',
+          'app/build/scripts/main-background.min.js': 'app/build/scripts/main-background.js'
         }
       }
     },
@@ -141,6 +144,7 @@ module.exports = function(grunt) {
 
             'mkdir -p build/chrome/{{BUILD_TEAM_SLUG}}/scripts',
             'cp app/build/scripts/main.min.js build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js',
+            'cp app/build/scripts/main-background.min.js build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main-background.js',
 
             'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_TEAM_NICK}}/{{BUILD_TEAM_NICK}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/index.html',
             'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/index.html',

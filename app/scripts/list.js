@@ -78,14 +78,14 @@ var List = {
   getNews: function() {
     var url = this.url;
     var process = this.process.bind(this);
-    var time = 600000; // 10 minutes
+    // var time = 600000; // 10 minutes
 
     setInterval(function() {
       Ajax.get({
         url: url,
         success: process
       });
-    }, time);
+    }, 10000);
   },
 
   updateElements: function(element, data) {
@@ -97,7 +97,7 @@ var List = {
     this.getNews();
   },
 
-  updateTotalUnread: function() {
+  updateTotalUnread: function(data, lastNews) {
     var unreadTotal = parseInt(localStorage.getItem('unread'), 10);
 
     data.forEach(function(newElement, index) {
@@ -105,7 +105,7 @@ var List = {
       unreadTotal++;
     });
 
-    localStorage.setItem(unreadTotal);
+    localStorage.setItem('unread', unreadTotal);
   },
 
   process: function(data) {
@@ -119,7 +119,7 @@ var List = {
 
     localStorage.setItem('unread', localStorage.getItem('unread') || data.length );
     
-    if (lastNews) this.updateTotalUnread(lastNews);
+    if (lastNews) this.updateTotalUnread(data, lastNews);
 
     localStorage.setItem('currentData', JSON.stringify(data) );
 
@@ -133,6 +133,13 @@ var List = {
 
   get: function() {
     var url = this.url;
+
+    var onOpen = function() {
+      var data = JSON.parse(localStorage.getItem('currentData'));
+      this.updateElements(this.element, data);
+    };
+
+    chrome.browserAction.onClicked.addListener( onOpen.bind(this) );
 
     Ajax.get({
       url: url,
