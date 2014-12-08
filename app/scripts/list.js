@@ -105,7 +105,7 @@ var List = {
     var unreadTotal = parseInt(localStorage.getItem('unread'), 10);
 
     data.forEach(function(newElement, index) {
-      if (newElement.id === lastNews[index]) return false;
+      if (newElement.id === lastNews[index].id) return false;
       unreadTotal++;
     });
 
