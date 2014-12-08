@@ -20,5 +20,11 @@
   },
   "manifest_version": 2,
   "name": "{{ENVIRONMENT_TEAM_NICK}} ZH",
+  "permissions": [
+    "http://*.clicrbs.com.br/",
+    "https://*.google-analytics.com/",
+    "http://*.googleapis.com/",
+    "http://localhost:7000/"
+  ],
   "version": "{{ENVIRONMENT_VERSION}}"
 }

@@ -81,13 +81,11 @@ var List = {
     // var time = 600000; // 10 minutes
 
     setInterval(function() {
+      console.log('url=', url);
       Ajax.get({
         url: url,
         success: process
       });
-
-      chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
-      chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') || '20' } );
     }, 10000);
 
     chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
@@ -133,8 +131,8 @@ var List = {
     localStorage.setItem('currentData', JSON.stringify(data) );
 
     // if (Env.isChromeKind) {
-      // chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
-      // chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
+    chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
+    chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
     // }
 
     this.updateElements(this.element, data);

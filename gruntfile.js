@@ -75,10 +75,10 @@ module.exports = function(grunt) {
 
     uglify: {
       main: {
-        // options: {
-        //   beautify: true,
-        //   // mangle: false
-        // },
+        options: {
+          beautify: true,
+          // mangle: false
+        },
         files: {
           'app/build/scripts/main.min.js': 'app/build/scripts/main.js',
           'app/build/scripts/main-background.min.js': 'app/build/scripts/main-background.js'
@@ -151,6 +151,8 @@ module.exports = function(grunt) {
 
             'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_KIND_SLUG}}/chrome/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js',
             'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js',
+            'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_KIND_SLUG}}/chrome/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main-background.js',
+            'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main-background.js',
 
             'cd build/chrome/{{BUILD_TEAM_SLUG}}',
             'zip -r "{{BUILD_TEAM_SLUG}}-{{BUILD_VERSION}}.zip" * 1>/dev/null 2>&1',
