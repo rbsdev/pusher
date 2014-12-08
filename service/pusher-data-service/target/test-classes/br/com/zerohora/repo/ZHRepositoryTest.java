@@ -127,7 +127,7 @@ public class ZHRepositoryTest extends ZHRepository {
 		arrayItemLinkDesktopMustBeEqualsDefinedObject();
 		arrayItemLinkMobileMustBeEqualsDefinedObject();
 		
-		Assert.assertEquals(1, 2);
+		Assert.assertEquals(1, 2); 
 	}
 	
 	private static ZHRepositoryTest thisTest = null;
