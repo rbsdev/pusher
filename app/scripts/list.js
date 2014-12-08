@@ -78,7 +78,7 @@ var List = {
   getNews: function() {
     var url = this.url;
     var process = this.process.bind(this);
-    // var time = 600000; // 10 minutes
+    var time = 600000; // 10 minutes
 
     setInterval(function() {
       console.log('url=', url);
@@ -86,7 +86,7 @@ var List = {
         url: url,
         success: process
       });
-    }, 10000);
+    }, time);
 
     chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
     chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') || '20' } );
