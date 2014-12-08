@@ -108,7 +108,7 @@ var List = {
       unreadTotal++;
     });
 
-    localStorage.setItem('unread', unreadTotal);
+    localStorage.setItem('unread', unreadTotal > 20 ? 20 :  unreadTotal);
 
     chrome.browserAction.setBadgeBackgroundColor({ color: [0, 0, 0, 255] });
     chrome.browserAction.setBadgeText( { text: localStorage.getItem('unread') } );
