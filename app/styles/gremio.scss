@@ -2,13 +2,13 @@
 
 $gremio-color: #2391e6;
 
-body:after {
+body::after {
 	content: " ";
 	width: 100%;
 	position: fixed;
 	z-index: 3;
 	bottom: 0;
-	border-bottom: 4px solid $gremio-color;
+	border-bottom: 2px solid $gremio-color;
 }
 
 h1 {

@@ -134,7 +134,7 @@ module.exports = function(grunt) {
             'cp app/build/styles/{{BUILD_TEAM_SLUG}}.css build/chrome/{{BUILD_TEAM_SLUG}}/styles/main.css',
 
             'mkdir -p build/chrome/{{BUILD_TEAM_SLUG}}/images',
-            'cp app/images/* build/chrome/{{BUILD_TEAM_SLUG}}/images/',
+            'cp app/images/* build/chrome/{{BUILD_TEAM_SLUG}}/images/ 1>/dev/null 2>&1',
             'cp -R app/images/{{BUILD_TEAM_SLUG}}/ build/chrome/{{BUILD_TEAM_SLUG}}/images/',
 
             'cp app/index.html build/chrome/{{BUILD_TEAM_SLUG}}/index.html',
@@ -149,7 +149,7 @@ module.exports = function(grunt) {
             'sed -i ' + (isDarwin ? '""' : '') + ' "s/{{ENVIRONMENT_TEAM_SLUG}}/{{BUILD_TEAM_SLUG}}/g" build/chrome/{{BUILD_TEAM_SLUG}}/scripts/main.js',
 
             'cd build/chrome/{{BUILD_TEAM_SLUG}}',
-            'zip -r "{{BUILD_TEAM_SLUG}}-{{BUILD_VERSION}}.zip" *',
+            'zip -r "{{BUILD_TEAM_SLUG}}-{{BUILD_VERSION}}.zip" * 1>/dev/null 2>&1',
             'mv "{{BUILD_TEAM_SLUG}}-{{BUILD_VERSION}}.zip" ..',
             'cd ../../..'
           ];
@@ -165,7 +165,7 @@ module.exports = function(grunt) {
             'cp app/build/styles/{{BUILD_TEAM_SLUG}}.css build/sandbox/{{BUILD_TEAM_SLUG}}/styles/main.css',
 
             'mkdir -p build/sandbox/{{BUILD_TEAM_SLUG}}/images',
-            'cp app/images/* build/sandbox/{{BUILD_TEAM_SLUG}}/images/',
+            'cp app/images/* build/sandbox/{{BUILD_TEAM_SLUG}}/images/ 1>/dev/null 2>&1',
             'cp -R app/images/{{BUILD_TEAM_SLUG}}/ build/sandbox/{{BUILD_TEAM_SLUG}}/images/',
 
             'cp app/index.html build/sandbox/{{BUILD_TEAM_SLUG}}/index.html',
