@@ -98,7 +98,6 @@ var List = {
     if (element) element.innerHTML = html;
 
     this.updateLinks();
-    this.getNews();
   },
 
   updateTotalUnread: function(data, lastNews) {
